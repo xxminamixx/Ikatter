@@ -107,11 +107,11 @@ class ViewController: UIViewController {
                                                 })
                                                 
                                                 // 検索
-//                                                swifter.searchTweet(using: "swift", geocode: nil, lang: nil, locale: nil, resultType: nil, count: 10, until: nil, sinceID: nil, maxID: nil, includeEntities: nil, callback: nil, success: { json in
-//                                                    print(json)
-//                                                }, failure: { error in
-//                                                    print(error)
-//                                                })
+                                                swifter.searchTweet(using: "アマゾン", geocode: nil, lang: "ja", locale: "ja", resultType: nil, count: 50, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { json in
+                                                    print(json)
+                                                }, failure: { error in
+                                                    print(error)
+                                                })
                                                 
 
                                             }
