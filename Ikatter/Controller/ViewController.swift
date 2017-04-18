@@ -14,18 +14,33 @@ import Swifter
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var tweetTableView: UITableView!
+    
+    var searchBar: UISearchBar!
     var accountStore = ACAccountStore()
     var account: ACAccount?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // プロパティにツイッターアカウントセット
         selectTwitterAccount()
+        
+        // サーチバーを表示
+        setupSearchBar()
+        
+        // ステージと武器一覧のTableViewの初期設定
+        tweetTableView.dataSource = self
+        tweetTableView.delegate = self
+        let nib = UINib.init(nibName: "TweetTableViewCell", bundle: nil)
+        tweetTableView.register(nib, forCellReuseIdentifier: "TweetTableViewCell")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
+    // 端末に登録されているTwitterアカウント取得
     private func selectTwitterAccount() {
         
         let accountType = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
@@ -58,6 +73,10 @@ class ViewController: UIViewController {
         })
     }
     
+    
+    /// 複数のTwitterアカウントから選択したアカウントを自身のプロパティにセットする
+    ///
+    /// - Parameter accounts: 端末に登録されているTiwtterアカウント配列
     private func chooseAccount(accounts: [ACAccount]) {
         
         let alert = UIAlertController(title: "Twitter", message: "Choose an account", preferredStyle: .actionSheet)
@@ -102,5 +121,43 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    // MARK: サーチバーをナビゲーションバーに表示する
+    private func setupSearchBar() {
+        if let navigationBarFrame = navigationController?.navigationBar.bounds {
+            let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+            searchBar.delegate = self
+            searchBar.placeholder = "Search"
+            searchBar.showsCancelButton = true
+            searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+            searchBar.keyboardType = UIKeyboardType.default
+            navigationItem.titleView = searchBar
+            navigationItem.titleView?.frame = searchBar.frame
+            self.searchBar = searchBar
+            searchBar.becomeFirstResponder()
+        }
+    }
+    
 }
 
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell", for: indexPath) as! TweetTableViewCell
+        
+        return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 250
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
+    // TODO: サーチバーに入力した文字でTweetを検索しテーブルビューに表示
+}

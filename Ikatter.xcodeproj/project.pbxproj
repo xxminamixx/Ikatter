@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D04925F1EA6090300EFC093 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04925E1EA6090300EFC093 /* ViewController.swift */; };
 		9D259AF11EA5D9E4004A7FCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D259AF01EA5D9E4004A7FCA /* AppDelegate.swift */; };
-		9D259AF31EA5D9E4004A7FCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D259AF21EA5D9E4004A7FCA /* ViewController.swift */; };
 		9D259AF61EA5D9E4004A7FCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D259AF41EA5D9E4004A7FCA /* Main.storyboard */; };
 		9D259AF81EA5D9E4004A7FCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D259AF71EA5D9E4004A7FCA /* Assets.xcassets */; };
 		9D259AFB1EA5D9E4004A7FCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D259AF91EA5D9E4004A7FCA /* LaunchScreen.storyboard */; };
 		9D259B061EA5D9E4004A7FCA /* IkatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D259B051EA5D9E4004A7FCA /* IkatterTests.swift */; };
+		9D259B151EA601C8004A7FCA /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */; };
+		9D259B161EA601C8004A7FCA /* TweetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */; };
 		A72A6F8B87FD5ED576733E3A /* Pods_IkatterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66978A191F134F31006E6D43 /* Pods_IkatterTests.framework */; };
 		DEE9491393BCBE3C1F80C081 /* Pods_Ikatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795A72334118B3F400DF74FD /* Pods_Ikatter.framework */; };
 /* End PBXBuildFile section */
@@ -33,9 +35,9 @@
 		5E3E77F51F5754D42FC0C71E /* Pods-Ikatter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ikatter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ikatter/Pods-Ikatter.debug.xcconfig"; sourceTree = "<group>"; };
 		66978A191F134F31006E6D43 /* Pods_IkatterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IkatterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		795A72334118B3F400DF74FD /* Pods_Ikatter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ikatter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D04925E1EA6090300EFC093 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
 		9D259AED1EA5D9E4004A7FCA /* Ikatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ikatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D259AF01EA5D9E4004A7FCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9D259AF21EA5D9E4004A7FCA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9D259AF51EA5D9E4004A7FCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9D259AF71EA5D9E4004A7FCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D259AFA1EA5D9E4004A7FCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,6 +45,8 @@
 		9D259B011EA5D9E4004A7FCA /* IkatterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IkatterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D259B051EA5D9E4004A7FCA /* IkatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IkatterTests.swift; sourceTree = "<group>"; };
 		9D259B071EA5D9E4004A7FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetTableViewCell.swift; path = View/TweetTableViewCell.swift; sourceTree = "<group>"; };
+		9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetTableViewCell.xib; path = View/TweetTableViewCell.xib; sourceTree = "<group>"; };
 		DFF69B8508139D24B6D7B1C5 /* Pods-Ikatter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ikatter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ikatter/Pods-Ikatter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,10 +103,10 @@
 			isa = PBXGroup;
 			children = (
 				9D259AF01EA5D9E4004A7FCA /* AppDelegate.swift */,
-				9D259AF21EA5D9E4004A7FCA /* ViewController.swift */,
-				9D259AF41EA5D9E4004A7FCA /* Main.storyboard */,
+				9D259B111EA6017C004A7FCA /* Model */,
+				9D259B121EA60182004A7FCA /* View */,
+				9D259B101EA60172004A7FCA /* Controller */,
 				9D259AF71EA5D9E4004A7FCA /* Assets.xcassets */,
-				9D259AF91EA5D9E4004A7FCA /* LaunchScreen.storyboard */,
 				9D259AFC1EA5D9E4004A7FCA /* Info.plist */,
 			);
 			path = Ikatter;
@@ -115,6 +119,32 @@
 				9D259B071EA5D9E4004A7FCA /* Info.plist */,
 			);
 			path = IkatterTests;
+			sourceTree = "<group>";
+		};
+		9D259B101EA60172004A7FCA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9D04925E1EA6090300EFC093 /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9D259B111EA6017C004A7FCA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9D259B121EA60182004A7FCA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9D259AF91EA5D9E4004A7FCA /* LaunchScreen.storyboard */,
+				9D259AF41EA5D9E4004A7FCA /* Main.storyboard */,
+				9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */,
+				9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		DC7A8342951BFB40E924D885 /* Pods */ = {
@@ -220,6 +250,7 @@
 				9D259AFB1EA5D9E4004A7FCA /* LaunchScreen.storyboard in Resources */,
 				9D259AF81EA5D9E4004A7FCA /* Assets.xcassets in Resources */,
 				9D259AF61EA5D9E4004A7FCA /* Main.storyboard in Resources */,
+				9D259B161EA601C8004A7FCA /* TweetTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,8 +361,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D259AF31EA5D9E4004A7FCA /* ViewController.swift in Sources */,
+				9D04925F1EA6090300EFC093 /* ViewController.swift in Sources */,
 				9D259AF11EA5D9E4004A7FCA /* AppDelegate.swift in Sources */,
+				9D259B151EA601C8004A7FCA /* TweetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +573,7 @@
 				9D259B0C1EA5D9E4004A7FCA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9D259B0D1EA5D9E4004A7FCA /* Build configuration list for PBXNativeTarget "IkatterTests" */ = {
 			isa = XCConfigurationList;
@@ -549,6 +582,7 @@
 				9D259B0F1EA5D9E4004A7FCA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
