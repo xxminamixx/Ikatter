@@ -6,6 +6,9 @@ target 'Ikatter' do
   use_frameworks!
 
   pod 'Swifter', :git => 'https://github.com/xxminamixx/Swifter'
+  pod 'AlamofireImage', '3.2.0'
+  pod 'Cartography' , :git => 'https://github.com/xxminamixx/Cartography'
+  pod 'RealmSwift', '2.1.2'
 
   # Pods for Ikatter
 

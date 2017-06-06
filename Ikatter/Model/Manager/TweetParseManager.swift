@@ -10,12 +10,23 @@ import UIKit
 
 class TweetParseManager {
     
-    static func jsonParser(json: Data) {
-        let a = try! JSONSerialization.jsonObject(with: json, options: JSONSerialization.ReadingOptions.allowFragments)
-        if let jsonDic = a as? NSDictionary {
-            print(jsonDic)
-        }
-        
-    }
+//    static func jsonParser(json: JSON) -> [TweetEntity] {
+////        let json = try! JSONSerialization.jsonObject(with: json, options: JSONSerialization.ReadingOptions.allowFragments)
+////        if let jsonDic = json as? Dictionary<String, Any> {
+////            return jsonDic
+////        } else {
+////            return nil
+////        }
+////    }
+//        let json = JSON(json)
+//        var entity = [TweetEntity]()
+//        for tweet in json {
+//            let tweetEntity = TweetEntity()
+//            tweetEntity.name = tweet.1.string
+//            
+//            entity.append(tweetEntity)
+//        }
+//        return entity
+//    }
 }
-    
+

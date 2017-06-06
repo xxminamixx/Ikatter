@@ -1,21 +1,43 @@
 PODS:
+  - Alamofire (4.2.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
+  - Cartography (1.1.0)
+  - Realm (2.1.2):
+    - Realm/Headers (= 2.1.2)
+  - Realm/Headers (2.1.2)
+  - RealmSwift (2.1.2):
+    - Realm (= 2.1.2)
   - Swifter (2.0.2)
 
 DEPENDENCIES:
+  - AlamofireImage (= 3.2.0)
+  - Cartography (from `https://github.com/xxminamixx/Cartography`)
+  - RealmSwift (= 2.1.2)
   - Swifter (from `https://github.com/xxminamixx/Swifter`)
 
 EXTERNAL SOURCES:
+  Cartography:
+    :git: https://github.com/xxminamixx/Cartography
   Swifter:
     :git: https://github.com/xxminamixx/Swifter
 
 CHECKOUT OPTIONS:
+  Cartography:
+    :commit: 1a3c5b9497dcd3f67faa66ddf434c9706aa5973f
+    :git: https://github.com/xxminamixx/Cartography
   Swifter:
     :commit: 6d15237f58a1c4d65d8686978dfb9e0132e625b5
     :git: https://github.com/xxminamixx/Swifter
 
 SPEC CHECKSUMS:
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
+  Cartography: 8ec6e9dc98f6ee6ea6100f345d09426dd349000b
+  Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
+  RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
   Swifter: ec243114356f2e4c654a1957b770c6e925d2ea75
 
-PODFILE CHECKSUM: 77d9a5f7e2ad94bdd867ef9fa6a8c81d189260b6
+PODFILE CHECKSUM: c9f966da7c19efaf47352709763aac3279219113
 
 COCOAPODS: 1.1.1
