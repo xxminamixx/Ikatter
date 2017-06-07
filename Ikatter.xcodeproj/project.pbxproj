@@ -18,6 +18,7 @@
 		9D259B151EA601C8004A7FCA /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */; };
 		9D259B161EA601C8004A7FCA /* TweetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */; };
 		9DD5C9FA1EE696BD003FC70A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5C9F91EE696BD003FC70A /* RealmManager.swift */; };
+		9DD5C9FE1EE7BA77003FC70A /* ConstColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5C9FD1EE7BA77003FC70A /* ConstColor.swift */; };
 		A72A6F8B87FD5ED576733E3A /* Pods_IkatterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66978A191F134F31006E6D43 /* Pods_IkatterTests.framework */; };
 		DEE9491393BCBE3C1F80C081 /* Pods_Ikatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795A72334118B3F400DF74FD /* Pods_Ikatter.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetTableViewCell.swift; path = View/TweetTableViewCell.swift; sourceTree = "<group>"; };
 		9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetTableViewCell.xib; path = View/TweetTableViewCell.xib; sourceTree = "<group>"; };
 		9DD5C9F91EE696BD003FC70A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		9DD5C9FD1EE7BA77003FC70A /* ConstColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConstColor.swift; path = Utility/Const/ConstColor.swift; sourceTree = "<group>"; };
 		DFF69B8508139D24B6D7B1C5 /* Pods-Ikatter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ikatter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ikatter/Pods-Ikatter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				9D259AF01EA5D9E4004A7FCA /* AppDelegate.swift */,
+				9DD5C9FB1EE7BA33003FC70A /* Utility */,
 				9D259B111EA6017C004A7FCA /* Model */,
 				9D259B121EA60182004A7FCA /* View */,
 				9D259B101EA60172004A7FCA /* Controller */,
@@ -170,6 +173,30 @@
 				9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		9DD5C9FB1EE7BA33003FC70A /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				9DD5C9FF1EE7C418003FC70A /* Extension */,
+				9DD5C9FC1EE7BA3E003FC70A /* Const */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		9DD5C9FC1EE7BA3E003FC70A /* Const */ = {
+			isa = PBXGroup;
+			children = (
+				9DD5C9FD1EE7BA77003FC70A /* ConstColor.swift */,
+			);
+			name = Const;
+			sourceTree = "<group>";
+		};
+		9DD5C9FF1EE7C418003FC70A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extension;
 			sourceTree = "<group>";
 		};
 		DC7A8342951BFB40E924D885 /* Pods */ = {
@@ -389,6 +416,7 @@
 				9D04925F1EA6090300EFC093 /* ViewController.swift in Sources */,
 				9D0492611EA6171C00EFC093 /* TweetParseManager.swift in Sources */,
 				9D259AF11EA5D9E4004A7FCA /* AppDelegate.swift in Sources */,
+				9DD5C9FE1EE7BA77003FC70A /* ConstColor.swift in Sources */,
 				9D259B151EA601C8004A7FCA /* TweetTableViewCell.swift in Sources */,
 				9D248D461EB0676200E9A907 /* TweetEntity.swift in Sources */,
 				9DD5C9FA1EE696BD003FC70A /* RealmManager.swift in Sources */,

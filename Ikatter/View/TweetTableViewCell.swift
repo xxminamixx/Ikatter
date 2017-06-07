@@ -25,7 +25,7 @@ class TweetTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         // 現状はImageの場所をとらないようにしておく
-        imageHeightAll0()
+//        imageHeightAll0()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -62,15 +62,15 @@ extension TweetTableViewCell {
     
     // 右下の画像の幅を0にする
     func buttonRightWidth0() {
-        constrain(ButtomRightImage) { view1 in
-            view1.width == 0
+        constrain(ButtomRightImage) { view in
+            view.width == 0
         }
     }
     
     // 左下の画像の幅を0にする
     func buttonLeftWidth0() {
-        constrain(ButtomLeftImage) { view1 in
-            view1.width == 0
+        constrain(ButtomLeftImage) { view in
+            view.width == 0
         }
     }
     
@@ -78,6 +78,20 @@ extension TweetTableViewCell {
     func buttonLeftWidthAlignRight() {
         constrain(ButtomLeftImage, upperRightImage) { view1, view2 in
             view1.right == view2.right
+        }
+    }
+    
+    // 右上の画像の幅を0にする
+    func upperRightWidth0() {
+        constrain(upperRightImage) { view in
+            view.width == 0
+        }
+    }
+    
+    // 左上の画像の幅を0にする
+    func upperLeftWidth0() {
+        constrain(upperLeftImage) { view in
+            view.width == 0
         }
     }
     

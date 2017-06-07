@@ -9,6 +9,7 @@ target 'Ikatter' do
   pod 'AlamofireImage', '3.2.0'
   pod 'Cartography' , :git => 'https://github.com/xxminamixx/Cartography'
   pod 'RealmSwift', '2.1.2'
+  pod 'DGElasticPullToRefresh', '1.1'
 
   # Pods for Ikatter
 
