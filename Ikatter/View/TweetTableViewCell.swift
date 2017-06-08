@@ -35,6 +35,10 @@ class TweetTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 //        favoriteButton.addTarget(self, action: Selector.init("tapped"), for: .touchUpInside)
+        favoriteButton.imageColorOff = UIColor.gray
+        favoriteButton.imageColorOn = ConstColor.pink
+        favoriteButton.circleColor = ConstColor.pink
+        favoriteButton.lineColor = ConstColor.pink
         favoriteButton.addTarget(self, action: #selector(tapped(sender:)), for: .touchUpInside)
     }
 

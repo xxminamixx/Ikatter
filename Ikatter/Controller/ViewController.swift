@@ -194,14 +194,20 @@ class ViewController: UIViewController {
                 return
             }
             
+            
             let defaults = UserDefaults.standard
             if let accountIdentifire = defaults.object(forKey: "account") {
                 self.account = self.accountStore.account(withIdentifier: accountIdentifire as! String)
             } else {
-                if let accounts = self.accountStore.accounts {
-                    // 複数のアカウントから選択させる
-                    self.chooseAccount(accounts: accounts as! [ACAccount])
+//                if let accounts = self.accountStore.accounts {
+//                    // 複数のアカウントから選択させる
+//                    self.chooseAccount(accounts: accounts as! [ACAccount])
+//                }
+                guard let accounts = self.accountStore.accounts(with: accountType) else {
+                    return
                 }
+                
+                self.chooseAccount(accounts: (accounts as? [ACAccount])!)
             }
             
         })
@@ -213,26 +219,29 @@ class ViewController: UIViewController {
     /// - Parameter accounts: 端末に登録されているTiwtterアカウント配列
     private func chooseAccount(accounts: [ACAccount]){
         
-        let alert = UIAlertController(title: "Twitter", message: "Choose an account", preferredStyle: .actionSheet)
-        
-        for account in accounts {
-            alert.addAction(UIAlertAction(title: account.username,
-                                          style: .default,
-                                          handler: { (action) -> Void in
-                                            
-                                            // 自身のプロパティにセット
-                                            self.account = account
-                                            
-                                            // アカウントIDをNSURLDefaultsで永続化
-                                            let userDefaults = UserDefaults.standard
-                                            userDefaults.set(account.identifier, forKey: "account")
-                                            
-                                            self.getTimeLine()
-                                        }))
+        DispatchQueue.main.sync {
+            let alert = UIAlertController(title: "Twitter", message: "Choose an account", preferredStyle: .actionSheet)
+            
+            for account in accounts {
+                alert.addAction(UIAlertAction(title: account.username,
+                                              style: .default,
+                                              handler: { (action) -> Void in
+                                                
+                                                // 自身のプロパティにセット
+                                                self.account = account
+                                                
+                                                // アカウントIDをNSURLDefaultsで永続化
+                                                let userDefaults = UserDefaults.standard
+                                                userDefaults.set(account.identifier, forKey: "account")
+                                                
+                                                self.getTimeLine()
+                }))
+            }
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+
     }
     
     
@@ -265,6 +274,8 @@ extension ViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell", for: indexPath) as! TweetTableViewCell
         
         // MARK: セルのセットアップ
+        
+        cell.delegate = self
         
         // TweetEntityの並びでセルにデータをセット
         if tweetList.count > 0 {
