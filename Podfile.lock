@@ -4,6 +4,7 @@ PODS:
     - Alamofire (~> 4.1)
   - Cartography (1.1.0)
   - DGElasticPullToRefresh (1.1)
+  - DOFavoriteButton (0.0.4)
   - Realm (2.1.2):
     - Realm/Headers (= 2.1.2)
   - Realm/Headers (2.1.2)
@@ -15,12 +16,15 @@ DEPENDENCIES:
   - AlamofireImage (= 3.2.0)
   - Cartography (from `https://github.com/xxminamixx/Cartography`)
   - DGElasticPullToRefresh (= 1.1)
+  - DOFavoriteButton (from `https://github.com/xxminamixx/DOFavoriteButton`)
   - RealmSwift (= 2.1.2)
   - Swifter (from `https://github.com/xxminamixx/Swifter`)
 
 EXTERNAL SOURCES:
   Cartography:
     :git: https://github.com/xxminamixx/Cartography
+  DOFavoriteButton:
+    :git: https://github.com/xxminamixx/DOFavoriteButton
   Swifter:
     :git: https://github.com/xxminamixx/Swifter
 
@@ -28,6 +32,9 @@ CHECKOUT OPTIONS:
   Cartography:
     :commit: 1a3c5b9497dcd3f67faa66ddf434c9706aa5973f
     :git: https://github.com/xxminamixx/Cartography
+  DOFavoriteButton:
+    :commit: 43c65253d4c14e596a511354ca0e0aac0ec2bd5c
+    :git: https://github.com/xxminamixx/DOFavoriteButton
   Swifter:
     :commit: 6d15237f58a1c4d65d8686978dfb9e0132e625b5
     :git: https://github.com/xxminamixx/Swifter
@@ -37,10 +44,11 @@ SPEC CHECKSUMS:
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Cartography: 8ec6e9dc98f6ee6ea6100f345d09426dd349000b
   DGElasticPullToRefresh: 28f11a6026302a90f8ffebbc6e24748e584dddd3
+  DOFavoriteButton: 866e15af173d2dd5233971a1f657a5f31d2491d5
   Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
   RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
   Swifter: ec243114356f2e4c654a1957b770c6e925d2ea75
 
-PODFILE CHECKSUM: b50721010fedb68a5d1192cb9ae61fd0469042f5
+PODFILE CHECKSUM: 76dac947fb6944c1500860902f3957a041d97478
 
 COCOAPODS: 1.1.1

@@ -10,6 +10,7 @@ target 'Ikatter' do
   pod 'Cartography' , :git => 'https://github.com/xxminamixx/Cartography'
   pod 'RealmSwift', '2.1.2'
   pod 'DGElasticPullToRefresh', '1.1'
+  pod 'DOFavoriteButton', :git => 'https://github.com/xxminamixx/DOFavoriteButton'
 
   # Pods for Ikatter
 

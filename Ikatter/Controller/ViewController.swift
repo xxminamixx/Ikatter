@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         tweetTableView.register(nib, forCellReuseIdentifier: "TweetTableViewCell")
         
         // TableViewの高さ自動計算
-        tweetTableView.estimatedRowHeight = 240
+        tweetTableView.estimatedRowHeight = 300
         tweetTableView.rowHeight = UITableViewAutomaticDimension
         
         // 引っ張ってリロードする設定
@@ -120,6 +120,8 @@ class ViewController: UIViewController {
 
     }
     
+    
+    /// お気に入り取得
     func getFavorite() {
         // アカウント情報がなかったら何もしない
         guard let account = account else {
@@ -147,7 +149,19 @@ class ViewController: UIViewController {
         swifter.favouriteTweet(forID: id)
         
     }
- 
+    
+    /// 指定ツイートのお気に入りを解除する
+    ///
+    /// - Parameter id: ツイートID
+    func postUnFavorite(id: String) {
+        // アカウント情報がなかったら何もしない
+        guard let account = account else {
+            return
+        }
+        
+        let swifter = Swifter(account: account)
+        swifter.unfavouriteTweet(forID: id)
+    }
     
     
     /// 最新のidを返す
@@ -307,4 +321,24 @@ extension ViewController: UITableViewDelegate {}
 
 extension ViewController: UISearchBarDelegate {
     // TODO: サーチバーに入力した文字でTweetを検索しテーブルビューに表示
+}
+
+extension ViewController: TweetTableViewCellDelegate {
+    
+    // お気に入りメソッドをコール
+    func pressdFavorite(cell: TweetTableViewCell) {
+        let indexPath = tweetTableView.indexPath(for: cell)
+        if let id = tweetList[(indexPath?.row)!].id {
+            postFavorite(id: id)
+        }
+    }
+    
+    // お気に入り解除メソッドをコール
+    func pressdUnFavorite(cell: TweetTableViewCell) {
+        let indexPath = tweetTableView.indexPath(for: cell)
+        if let id = tweetList[(indexPath?.row)!].id {
+            postUnFavorite(id: id)
+        }
+    }
+    
 }

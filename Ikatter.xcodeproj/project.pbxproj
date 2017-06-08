@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9D04925F1EA6090300EFC093 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04925E1EA6090300EFC093 /* ViewController.swift */; };
 		9D0492611EA6171C00EFC093 /* TweetParseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0492601EA6171C00EFC093 /* TweetParseManager.swift */; };
+		9D052D251EE92B3600AF5B5E /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D052D241EE92B3600AF5B5E /* heart.png */; };
 		9D248D461EB0676200E9A907 /* TweetEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D248D451EB0676200E9A907 /* TweetEntity.swift */; };
 		9D259AF11EA5D9E4004A7FCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D259AF01EA5D9E4004A7FCA /* AppDelegate.swift */; };
 		9D259AF61EA5D9E4004A7FCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D259AF41EA5D9E4004A7FCA /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		795A72334118B3F400DF74FD /* Pods_Ikatter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ikatter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D04925E1EA6090300EFC093 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
 		9D0492601EA6171C00EFC093 /* TweetParseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetParseManager.swift; path = Model/Manager/TweetParseManager.swift; sourceTree = "<group>"; };
+		9D052D241EE92B3600AF5B5E /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = heart.png; path = Resources/heart.png; sourceTree = "<group>"; };
 		9D248D451EB0676200E9A907 /* TweetEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetEntity.swift; path = Model/Entity/TweetEntity.swift; sourceTree = "<group>"; };
 		9D259AED1EA5D9E4004A7FCA /* Ikatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ikatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D259AF01EA5D9E4004A7FCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,14 @@
 			name = Manager;
 			sourceTree = "<group>";
 		};
+		9D052D231EE92B2400AF5B5E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9D052D241EE92B3600AF5B5E /* heart.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		9D248D441EB0674100E9A907 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +144,7 @@
 				9D259B111EA6017C004A7FCA /* Model */,
 				9D259B121EA60182004A7FCA /* View */,
 				9D259B101EA60172004A7FCA /* Controller */,
+				9D052D231EE92B2400AF5B5E /* Resources */,
 				9D259AF71EA5D9E4004A7FCA /* Assets.xcassets */,
 				9D259AFC1EA5D9E4004A7FCA /* Info.plist */,
 			);
@@ -304,6 +315,7 @@
 			files = (
 				9D259AFB1EA5D9E4004A7FCA /* LaunchScreen.storyboard in Resources */,
 				9D259AF81EA5D9E4004A7FCA /* Assets.xcassets in Resources */,
+				9D052D251EE92B3600AF5B5E /* heart.png in Resources */,
 				9D259AF61EA5D9E4004A7FCA /* Main.storyboard in Resources */,
 				9D259B161EA601C8004A7FCA /* TweetTableViewCell.xib in Resources */,
 			);

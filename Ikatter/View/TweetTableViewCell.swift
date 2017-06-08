@@ -8,6 +8,12 @@
 
 import UIKit
 import Cartography
+import DOFavoriteButton
+
+protocol TweetTableViewCellDelegate {
+    func pressdFavorite(cell: TweetTableViewCell)
+    func pressdUnFavorite(cell: TweetTableViewCell)
+}
 
 class TweetTableViewCell: UITableViewCell {
 
@@ -21,30 +27,38 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var ButtomLeftImage: UIImageView!
     @IBOutlet weak var ButtomRightImage: UIImageView!
     
+    /// お気に入りボタン
+    @IBOutlet weak var favoriteButton: DOFavoriteButton!
+    
+    var delegate: TweetTableViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        // 現状はImageの場所をとらないようにしておく
-//        imageHeightAll0()
+//        favoriteButton.addTarget(self, action: Selector.init("tapped"), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(tapped(sender:)), for: .touchUpInside)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    // 高さ自動計算にしたので一旦コメントアウト
-//    // セルの高さを返す
-//    func hight() -> CGFloat {
-//        // セルを再レイアウト
-//        self.contentView.setNeedsLayout()
-//        self.contentView.layoutIfNeeded()
-//        
-//        let nameHeight = 10 + name.frame.size.height + 10
-//        let tweetHeight = tweet.frame.size.height + 10
-//        let imageHeight = upperLeftImage.frame.size.height + 10 + ButtomLeftImage.frame.size.height + 10
-//        // 名前ラベル, ツイートラベル, 画像, 各マージンそれぞれを足したものをセルの高さとして返却
-//        return nameHeight + tweetHeight + imageHeight
-//    }
+    
+    /// お気に入りボタンが押された時の処理
+    func tapped(sender: DOFavoriteButton) {
+        
+        if sender.isSelected {
+            // お気に入りを解除する
+            
+            delegate?.pressdUnFavorite(cell: self)
+            sender.deselect()
+        } else {
+            // お気に入りする
+            
+            delegate?.pressdFavorite(cell: self)
+            sender.select()
+        }
+        
+    }
     
 }
 
