@@ -48,6 +48,7 @@ class ViewController: UIViewController {
         loadingView.tintColor = UIColor.white
         tweetTableView.dg_addPullToRefreshWithActionHandler({
             self.getTimeLine()
+//            self.getFavorite()
             self.tweetTableView.reloadData()
             self.tweetTableView.dg_stopLoading()
         }, loadingView: loadingView)
@@ -59,12 +60,45 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getTimeLine()
+//        getFavorite()
         tweetTableView.reloadData()
     }
 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    
+    // jsonをパースし、自身のtweetListプロパティに格納
+    func tweetParser(json: JSON) {
+        
+        if let tweetList = json.array {
+            // 各Tweetをパース
+            for tweet in tweetList {
+                let entity = TweetEntity()
+                entity.name = tweet["user"]["name"].string
+                entity.icon = tweet["user"]["profile_image_url_https"].string
+                entity.tweet = tweet["text"].string
+                entity.id = tweet["id_str"].string
+                
+                // Tweetに含まれる画像urlをパース
+                let imageList = tweet["extended_entities"]["media"]
+                entity.upperLeftImage = imageList[0]["media_url_https"].string
+                entity.upperRightImage = imageList[1]["media_url_https"].string
+                entity.buttomLeftImage = imageList[2]["media_url_https"].string
+                entity.buttomRightImage = imageList[3]["media_url_https"].string
+                
+                // TODO: ここの処理重そうなので後で処理回数少なくする方法を考える
+                // 同じツイートidがあったら追加しない
+                if self.tweetList.filter({$0.id == entity.id}).count == 0 {
+                    self.tweetList.append(entity)
+                }
+            }
+            // 新しいツイート順にソート
+            self.tweetList.sort(by: {$0 > $1})
+        }
+
     }
     
     
@@ -75,39 +109,45 @@ class ViewController: UIViewController {
             let swifter = Swifter(account: account!)
             
             // タイムライン取得
-            swifter.getHomeTimeline(count: 100, sinceID: sinceId(), success: { json in
+            swifter.getHomeTimeline(count: 10, sinceID: sinceId(), maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: true, success: { json in
                 
-                // jsonを配列に変換
-                if let tweetList = json.array {
-                    // 各Tweetをパース
-                    for tweet in tweetList {
-                        let entity = TweetEntity()
-                        entity.name = tweet["user"]["name"].string
-                        entity.icon = tweet["user"]["profile_image_url_https"].string
-                        entity.tweet = tweet["text"].string
-                        entity.id = tweet["id_str"].string
-                        
-                        // Tweetに含まれる画像urlをパース
-                        let imageList = tweet["extended_entities"]["media"]["media_url_https"]
-                        entity.upperLeftImage = imageList[0].string
-                        entity.upperRightImage = imageList[1].string
-                        entity.buttomLeftImage = imageList[2].string
-                        entity.buttomRightImage = imageList[3].string
-                        
-                        // TODO: ここの処理重そうなので後で処理回数少なくする方法を考える
-                        // 同じツイートidがあったら追加しない
-                        if self.tweetList.filter({$0.id == entity.id}).count == 0 {
-                            self.tweetList.append(entity)
-                        }
-                    }
-                    // 新しいツイート順にソート
-                    self.tweetList.sort(by: {$0 > $1})
-                }
+                self.tweetParser(json: json)
                 
+            }, failure: { error in
+                print(error)
             })
         }
 
     }
+    
+    func getFavorite() {
+        // アカウント情報がなかったら何もしない
+        guard let account = account else {
+            return
+        }
+        
+        let swifter = Swifter(account: account)
+        swifter.getRecentlyFavouritedTweets(count: 10, sinceID: nil, maxID: nil, success: { json in
+            self.tweetParser(json: json)
+        })
+    }
+    
+    
+    /// 指定ツイートをお気に入りする
+    ///
+    /// - Parameter id: ツイートID
+    func postFavorite(id: String) {
+        
+        // アカウント情報がなかったら何もしない
+        guard let account = account else {
+            return
+        }
+        
+        let swifter = Swifter(account: account)
+        swifter.favouriteTweet(forID: id)
+        
+    }
+ 
     
     
     /// 最新のidを返す
@@ -228,7 +268,7 @@ extension ViewController: UITableViewDataSource {
             if let url = tweet.buttomRightImage {
                 cell.ButtomRightImage.af_setImage(withURL: URL(string: url)!)
             } else {
-                // 画像がなかった場合
+                cell.buttonLeftWidthAlignRight()
                 cell.buttonRightWidth0()
             }
             
@@ -237,12 +277,14 @@ extension ViewController: UITableViewDataSource {
                 cell.ButtomLeftImage.af_setImage(withURL: URL(string: url)!)
             } else {
                 cell.buttonLeftWidth0()
+                cell.buttomImageHeight0()
             }
             
             // 右上の画像セット
             if let url = tweet.upperRightImage {
                 cell.upperRightImage.af_setImage(withURL: URL(string: url)!)
             } else {
+                cell.upperLeftWidthAlignRight()
                 cell.upperRightWidth0()
             }
             
@@ -251,6 +293,7 @@ extension ViewController: UITableViewDataSource {
                 cell.upperLeftImage.af_setImage(withURL: URL(string: url)!)
             } else {
                 cell.upperLeftWidth0()
+                cell.upperImageHeight0()
             }
         }
         
