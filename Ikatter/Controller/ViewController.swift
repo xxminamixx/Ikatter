@@ -29,8 +29,15 @@ class ViewController: UIViewController {
         
         selectTwitterAccount()
         
-        // サーチバーを表示
-        setupSearchBar()
+//        // サーチバーを表示
+//        setupSearchBar()
+        // ツイートボタンをNavigationBarの右に追加
+        let rightTweetButton = UIButton()
+        rightTweetButton.setImage(UIImage(named: "heart.png"), for: .normal)
+        rightTweetButton.sizeToFit()
+        rightTweetButton.addTarget(self, action: #selector(tweet), for: UIControlEvents.touchUpInside)
+        let rightTweetButtonItem = UIBarButtonItem(customView: rightTweetButton)
+        self.navigationItem.setRightBarButtonItems([rightTweetButtonItem], animated: true)
         
         // ステージと武器一覧のTableViewの初期設定
         tweetTableView.dataSource = self
@@ -67,6 +74,13 @@ class ViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // ツイートボタン押下時の処理
+    func tweet() {
+        let viewController = storyboard?.instantiateViewController(withIdentifier: TweetViewController.nibName)
+//        self.navigationController?.pushViewController(viewController!, animated: true)
+        self.present(viewController!, animated: true, completion: nil)
     }
     
     

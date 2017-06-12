@@ -18,6 +18,9 @@
 		9D259B061EA5D9E4004A7FCA /* IkatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D259B051EA5D9E4004A7FCA /* IkatterTests.swift */; };
 		9D259B151EA601C8004A7FCA /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */; };
 		9D259B161EA601C8004A7FCA /* TweetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */; };
+		9D31D2B41EEE6DDB0068D7F5 /* TweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D31D2B31EEE6DDB0068D7F5 /* TweetView.swift */; };
+		9D31D2B61EEE71380068D7F5 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D31D2B51EEE71380068D7F5 /* TweetViewController.swift */; };
+		9D4C9F3F1EEE56A00020847C /* TweetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C9F3D1EEE56A00020847C /* TweetView.xib */; };
 		9DCFA6FF1EE8E0FE000D4B0C /* LinkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCFA6FE1EE8E0FE000D4B0C /* LinkHelper.swift */; };
 		9DD5C9FA1EE696BD003FC70A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5C9F91EE696BD003FC70A /* RealmManager.swift */; };
 		9DD5C9FE1EE7BA77003FC70A /* ConstColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5C9FD1EE7BA77003FC70A /* ConstColor.swift */; };
@@ -56,6 +59,9 @@
 		9D259B071EA5D9E4004A7FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetTableViewCell.swift; path = View/TweetTableViewCell.swift; sourceTree = "<group>"; };
 		9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetTableViewCell.xib; path = View/TweetTableViewCell.xib; sourceTree = "<group>"; };
+		9D31D2B31EEE6DDB0068D7F5 /* TweetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetView.swift; path = View/TweetView.swift; sourceTree = "<group>"; };
+		9D31D2B51EEE71380068D7F5 /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
+		9D4C9F3D1EEE56A00020847C /* TweetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetView.xib; path = Controller/TweetView.xib; sourceTree = "<group>"; };
 		9DCFA6FE1EE8E0FE000D4B0C /* LinkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinkHelper.swift; path = Utility/LinkHelper.swift; sourceTree = "<group>"; };
 		9DD5C9F91EE696BD003FC70A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		9DD5C9FD1EE7BA77003FC70A /* ConstColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConstColor.swift; path = Utility/Const/ConstColor.swift; sourceTree = "<group>"; };
@@ -183,7 +189,10 @@
 				9D259AF91EA5D9E4004A7FCA /* LaunchScreen.storyboard */,
 				9D259AF41EA5D9E4004A7FCA /* Main.storyboard */,
 				9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */,
+				9D31D2B51EEE71380068D7F5 /* TweetViewController.swift */,
 				9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */,
+				9D4C9F3D1EEE56A00020847C /* TweetView.xib */,
+				9D31D2B31EEE6DDB0068D7F5 /* TweetView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -315,6 +324,7 @@
 			files = (
 				9D259AFB1EA5D9E4004A7FCA /* LaunchScreen.storyboard in Resources */,
 				9D259AF81EA5D9E4004A7FCA /* Assets.xcassets in Resources */,
+				9D4C9F3F1EEE56A00020847C /* TweetView.xib in Resources */,
 				9D052D251EE92B3600AF5B5E /* heart.png in Resources */,
 				9D259AF61EA5D9E4004A7FCA /* Main.storyboard in Resources */,
 				9D259B161EA601C8004A7FCA /* TweetTableViewCell.xib in Resources */,
@@ -430,11 +440,13 @@
 			files = (
 				9D04925F1EA6090300EFC093 /* ViewController.swift in Sources */,
 				9DCFA6FF1EE8E0FE000D4B0C /* LinkHelper.swift in Sources */,
+				9D31D2B61EEE71380068D7F5 /* TweetViewController.swift in Sources */,
 				9D0492611EA6171C00EFC093 /* TweetParseManager.swift in Sources */,
 				9D259AF11EA5D9E4004A7FCA /* AppDelegate.swift in Sources */,
 				9DD5C9FE1EE7BA77003FC70A /* ConstColor.swift in Sources */,
 				9D259B151EA601C8004A7FCA /* TweetTableViewCell.swift in Sources */,
 				9D248D461EB0676200E9A907 /* TweetEntity.swift in Sources */,
+				9D31D2B41EEE6DDB0068D7F5 /* TweetView.swift in Sources */,
 				9DD5C9FA1EE696BD003FC70A /* RealmManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
