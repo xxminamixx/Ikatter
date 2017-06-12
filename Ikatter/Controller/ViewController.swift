@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import AlamofireImage
+import DGElasticPullToRefresh
 import Accounts
 //import Social
 import Swifter
-import AlamofireImage
-import DGElasticPullToRefresh
 
 
 class ViewController: UIViewController {
@@ -19,8 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var tweetTableView: UITableView!
     
     var searchBar: UISearchBar!
-    var accountStore = ACAccountStore()
-    var account: ACAccount?
+//    var accountStore = ACAccountStore()
+//    var account: ACAccount?
     var tweetList = [TweetEntity]()
     
     
@@ -119,8 +119,9 @@ class ViewController: UIViewController {
     // TODO: 同じツイートが格納された場合、同一要素を削除するロジックが必要
     /// タイムラインを取得しTweetEntityに格納する
     func getTimeLine() {
-        if account != nil {
-            let swifter = Swifter(account: account!)
+        let manager = AccountStoreManager.shared
+        if manager.account != nil {
+            let swifter = Swifter(account: manager.account!)
             
             // タイムライン取得
             swifter.getHomeTimeline(count: 10, sinceID: sinceId(), maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: true, success: { json in
@@ -138,7 +139,8 @@ class ViewController: UIViewController {
     /// お気に入り取得
     func getFavorite() {
         // アカウント情報がなかったら何もしない
-        guard let account = account else {
+        let manager = AccountStoreManager.shared
+        guard let account = manager.account else {
             return
         }
         
@@ -155,7 +157,8 @@ class ViewController: UIViewController {
     func postFavorite(id: String) {
         
         // アカウント情報がなかったら何もしない
-        guard let account = account else {
+        let manager = AccountStoreManager.shared
+        guard let account = manager.account else {
             return
         }
         
@@ -169,7 +172,8 @@ class ViewController: UIViewController {
     /// - Parameter id: ツイートID
     func postUnFavorite(id: String) {
         // アカウント情報がなかったら何もしない
-        guard let account = account else {
+        let manager = AccountStoreManager.shared
+        guard let account = manager.account else {
             return
         }
         
@@ -194,9 +198,10 @@ class ViewController: UIViewController {
     // 端末に登録されているTwitterアカウント取得
     private func selectTwitterAccount() {
         
-        let accountType = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
+        let manager = AccountStoreManager.shared
+        let accountType = manager.accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
         
-        accountStore.requestAccessToAccounts(with: accountType, options: nil, completion: { (granted, error) -> Void in
+        manager.accountStore.requestAccessToAccounts(with: accountType, options: nil, completion: { (granted, error) -> Void in
            
             // エラー発生
             guard error == nil else {
@@ -211,13 +216,13 @@ class ViewController: UIViewController {
             
             let defaults = UserDefaults.standard
             if let accountIdentifire = defaults.object(forKey: "account") {
-                self.account = self.accountStore.account(withIdentifier: accountIdentifire as! String)
+                manager.account = manager.accountStore.account(withIdentifier: accountIdentifire as! String)
             } else {
 //                if let accounts = self.accountStore.accounts {
 //                    // 複数のアカウントから選択させる
 //                    self.chooseAccount(accounts: accounts as! [ACAccount])
 //                }
-                guard let accounts = self.accountStore.accounts(with: accountType) else {
+                guard let accounts = manager.accountStore.accounts(with: accountType) else {
                     return
                 }
                 
@@ -232,7 +237,7 @@ class ViewController: UIViewController {
     ///
     /// - Parameter accounts: 端末に登録されているTiwtterアカウント配列
     private func chooseAccount(accounts: [ACAccount]){
-        
+        let manager = AccountStoreManager.shared
         DispatchQueue.main.sync {
             let alert = UIAlertController(title: "Twitter", message: "Choose an account", preferredStyle: .actionSheet)
             
@@ -242,7 +247,7 @@ class ViewController: UIViewController {
                                               handler: { (action) -> Void in
                                                 
                                                 // 自身のプロパティにセット
-                                                self.account = account
+                                                manager.account = account
                                                 
                                                 // アカウントIDをNSURLDefaultsで永続化
                                                 let userDefaults = UserDefaults.standard

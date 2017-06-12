@@ -8,21 +8,23 @@
 
 import UIKit
 
+
 class TweetView: UIView {
 
     static let nibName = "TweetView"
     
     @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var textField: UITextView!
-
-    @IBOutlet weak var photoButton: UIButton!
     
+    @IBOutlet weak var textField: UITextView!
+    
+    @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var tweetButton: UIButton!
     
     @IBAction func photoButton(_ sender: Any) {
     }
     
     @IBAction func tweetButton(_ sender: Any) {
+        TweitterAPIManager.tweet(textField.text)
     }
  
 }
