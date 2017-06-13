@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol TweetViewDelegate {
+    func closeButtonTapped()
+}
 
 class TweetView: UIView {
 
@@ -20,13 +23,42 @@ class TweetView: UIView {
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var tweetButton: UIButton!
     
+    var delegate: TweetViewDelegate?
+    
+    override func awakeFromNib() {
+        textField.changeCaret(-8)
+        textField.becomeFirstResponder()
+        delegate = nil
+    }
+    
     @IBAction func photoButton(_ sender: Any) {
     }
     
     @IBAction func tweetButton(_ sender: Any) {
         TweitterAPIManager.tweet(textField.text)
     }
+    
+    @IBAction func textViewTapped(_ sender: Any) {
+        
+    }
  
+    @IBAction func closeButton(_ sender: Any) {
+//        DispatchQueue.main.async {
+//            self.textField.becomeFirstResponder()
+//        }
+        
+        delegate?.closeButtonTapped()
+    }
 }
 
+extension TweetView: UITextViewDelegate {
+    
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        if(text == "\n") {
+//            textView.resignFirstResponder()
+//            return false
+//        }
+//        return true
+//    }
+}
 

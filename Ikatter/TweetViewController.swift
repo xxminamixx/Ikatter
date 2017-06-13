@@ -20,12 +20,19 @@ class TweetViewController: UIViewController {
         super.viewDidLoad()
         
         tweetView = UINib(nibName: TweetView.nibName, bundle: nil).instantiate(withOwner: self, options: nil)[0] as? TweetView
-        constrain(tweetView!) { view in
-            view.height == 300
-            view.width == UIScreen.main.bounds.width
-        }
+        tweetView?.delegate = self
+        
+        // 各パーツの色設定
+        tweetView?.backgroundColor = UIColor.darkGray
+        tweetView?.photoButton.backgroundColor = UIColor.lightGray
+        tweetView?.tweetButton.backgroundColor = UIColor.lightGray
         
         self.contentView.addSubview(tweetView!)
+        
+        constrain(tweetView!) { view1 in
+            view1.height == 300
+            view1.width == UIScreen.main.bounds.width
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,4 +43,10 @@ class TweetViewController: UIViewController {
         
     }
 
+}
+
+extension TweetViewController: TweetViewDelegate {
+    func closeButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

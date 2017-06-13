@@ -77,6 +77,25 @@
             <point key="canvasLocation" x="2728.8000000000002" y="97.601199400299862"/>
         </scene>
         <!--Item-->
+        <scene sceneID="qut-Me-Ame">
+            <objects>
+                <viewController id="sV7-c1-LzW" customClass="DummyViewController" customModule="Ikatter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qxS-zf-UJ0"/>
+                        <viewControllerLayoutGuide type="bottom" id="cVs-vi-gpT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ClZ-X4-Knc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="ugX-nM-bbh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kBw-Vu-8gz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2729" y="848"/>
+        </scene>
+        <!--Item-->
         <scene sceneID="rQk-vP-0JQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Krv-Kb-O1I" sceneMemberID="viewController">
@@ -98,7 +117,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="7gu-Dk-mn5">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="j7y-r7-HoN" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="j7y-r7-HoN" customClass="TabBarController" customModule="Ikatter" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="KQ6-xt-DhT">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -107,6 +126,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Krv-Kb-O1I" kind="relationship" relationship="viewControllers" id="a2O-bp-eHe"/>
+                        <segue destination="sV7-c1-LzW" kind="relationship" relationship="viewControllers" id="6n4-b4-eNc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hJI-S6-vyT" userLabel="First Responder" sceneMemberID="firstResponder"/>
