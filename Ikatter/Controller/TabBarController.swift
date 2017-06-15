@@ -30,10 +30,18 @@ extension UITabBarController: UITabBarControllerDelegate {
             // DummyViewControllerはモーダルを出したい特定のタブに紐付けたViewController
             if let currentVC = self.selectedViewController{
                 //表示させるモーダル
-                let modalViewController: UIViewController = UIViewController()
-                //わかりやすく背景を赤色に
-                modalViewController.view.backgroundColor = UIColor.red
-                currentVC.present(modalViewController, animated: true, completion: nil)
+                
+                let navigationController = AccountNavigationController()
+                let accountTableViewController = AccountTableViewController()
+                navigationController.addChildViewController(accountTableViewController)
+                accountTableViewController.view.backgroundColor = UIColor.blue
+                currentVC.present(navigationController, animated: true, completion: nil)
+                
+                
+//                let modalViewController: UIViewController = UIViewController()
+//                //わかりやすく背景を赤色に
+//                modalViewController.view.backgroundColor = UIColor.red
+//                currentVC.present(modalViewController, animated: true, completion: nil)
             }
             return false
         }
