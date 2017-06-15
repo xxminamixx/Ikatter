@@ -7,8 +7,9 @@
 //
 
 import Swifter
+import Accounts
 
-class TweitterAPIManager {
+class TwitterAPIManager {
     
     static var tweetList = [TweetEntity]()
     
@@ -21,7 +22,7 @@ class TweitterAPIManager {
         swifter.postTweet(status: text)
     }
     
-    static func getTimeLine() {
+    static func getTimeLine(completion: @escaping () -> Void) {
         guard let account = AccountStoreManager.shared.account else {
             return
         }
@@ -31,7 +32,7 @@ class TweitterAPIManager {
         // タイムライン取得
         swifter.getHomeTimeline(count: 10, sinceID: sinceId(), maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: true, success: { json in
             
-            TweitterAPIManager.tweetParser(json: json)
+            TwitterAPIManager.tweetParser(json: json, completion: completion)
             
         }, failure: { error in
             print(error)
@@ -39,7 +40,7 @@ class TweitterAPIManager {
     }
     
     /// お気に入り取得
-    static func getFavorite() {
+    static func getFavorite(completion: @escaping () -> Void) {
         // アカウント情報がなかったら何もしない
         let manager = AccountStoreManager.shared
         guard let account = manager.account else {
@@ -48,23 +49,54 @@ class TweitterAPIManager {
         
         let swifter = Swifter(account: account)
         swifter.getRecentlyFavouritedTweets(count: 10, sinceID: nil, maxID: nil, success: { json in
-            TweitterAPIManager.tweetParser(json: json)
+            TwitterAPIManager.tweetParser(json: json, completion: completion)
         })
     }
+    
+    /// 指定ツイートをお気に入りする
+    ///
+    /// - Parameter id: ツイートID
+    static func postFavorite(id: String) {
+        
+        // アカウント情報がなかったら何もしない
+        let manager = AccountStoreManager.shared
+        guard let account = manager.account else {
+            return
+        }
+        
+        let swifter = Swifter(account: account)
+        swifter.favouriteTweet(forID: id)
+        
+    }
+    
+    /// 指定ツイートのお気に入りを解除する
+    ///
+    /// - Parameter id: ツイートID
+    static func postUnFavorite(id: String) {
+        // アカウント情報がなかったら何もしない
+        let manager = AccountStoreManager.shared
+        guard let account = manager.account else {
+            return
+        }
+        
+        let swifter = Swifter(account: account)
+        swifter.unfavouriteTweet(forID: id)
+    }
+
     
     /// 最新のidを返す
     static func sinceId() -> String? {
         
-        if TweitterAPIManager.tweetList.count > 0 {
+        if TwitterAPIManager.tweetList.count > 0 {
             // tweetが格納されていた場合
-            return TweitterAPIManager.tweetList.last?.id
+            return TwitterAPIManager.tweetList.last?.id
         } else {
             return nil
         }
         
     }
     
-    static func tweetParser(json: JSON) {
+    static func tweetParser(json: JSON, completion: () -> Void) {
         
         if let tweetList = json.array {
             // 各Tweetをパース
@@ -84,15 +116,40 @@ class TweitterAPIManager {
                 
                 // TODO: ここの処理重そうなので後で処理回数少なくする方法を考える
                 // 同じツイートidがあったら追加しない
-                if TweitterAPIManager.tweetList.filter({$0.id == entity.id}).count == 0 {
-                    TweitterAPIManager.tweetList.append(entity)
+                if TwitterAPIManager.tweetList.filter({$0.id == entity.id}).count == 0 {
+                    TwitterAPIManager.tweetList.append(entity)
                 }
             }
             // 新しいツイート順にソート
-            TweitterAPIManager.tweetList.sort(by: {$0 > $1})
+            TwitterAPIManager.tweetList.sort(by: {$0 > $1})
+            completion()
         }
         
     }
 
-
+    /// ACAccountからiconのURL文字列を取得し、クロージャでそのURLを用いて行いたい処理を渡す
+    ///
+    /// - Parameters:
+    ///   - account: iconURL文字列を取得するアカウント
+    ///   - completion: iconURL文字列を用いて行いたい処理
+    static func getUserIcon(account: ACAccount, completion: @escaping (_ icon: String) -> Void) {
+        
+        let swifter = Swifter(account: account)
+        var icon: String?
+        
+        swifter.showUser(for: UserTag.screenName(account.username), success: { json in
+            icon = json["profile_image_url_https"].string
+            
+        }, failure: { error in
+            icon = nil
+        })
+        
+        WaitContinuation.wait({icon == nil}, compleation: {
+            guard let safeIcon = icon else {
+                return
+            }
+           completion(safeIcon)
+        })
+    }
+    
 }

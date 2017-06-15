@@ -14,4 +14,8 @@ class AccountStoreManager {
     static let shared = AccountStoreManager()
     var accountStore = ACAccountStore()
     var account: ACAccount?
+    
+    func accountType() -> ACAccountType? {
+        return accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
+    }
 }

@@ -35,7 +35,7 @@ class TweetView: UIView {
     }
     
     @IBAction func tweetButton(_ sender: Any) {
-        TweitterAPIManager.tweet(textField.text)
+        TwitterAPIManager.tweet(textField.text)
     }
     
     @IBAction func textViewTapped(_ sender: Any) {

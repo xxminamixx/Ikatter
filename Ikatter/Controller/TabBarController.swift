@@ -34,14 +34,7 @@ extension UITabBarController: UITabBarControllerDelegate {
                 let navigationController = AccountNavigationController()
                 let accountTableViewController = AccountTableViewController()
                 navigationController.addChildViewController(accountTableViewController)
-                accountTableViewController.view.backgroundColor = UIColor.blue
                 currentVC.present(navigationController, animated: true, completion: nil)
-                
-                
-//                let modalViewController: UIViewController = UIViewController()
-//                //わかりやすく背景を赤色に
-//                modalViewController.view.backgroundColor = UIColor.red
-//                currentVC.present(modalViewController, animated: true, completion: nil)
             }
             return false
         }

@@ -7,45 +7,79 @@
 //
 
 import UIKit
+import Accounts
+import Swifter
+import AlamofireImage
 
 class AccountTableViewController: UITableViewController {
 
+    var accounts: [ACAccount]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // Twitterアカウントをプロパティにセット
+        let manager = AccountStoreManager.shared
+        let accountType = manager.accountType()
+        accounts = manager.accountStore.accounts(with: accountType) as? [ACAccount]
+        
+        // tableView初期設定
+        tableView.delegate = self
+        tableView.dataSource = self
+        let nib = UINib.init(nibName: AccountTableViewCell.nibName, bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: AccountTableViewCell.nibName)
+        
+        let rightCloseButon = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(close))
+        navigationItem.setRightBarButtonItems([rightCloseButon], animated: true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    // 自身を閉じる
+    func close() {
+        self.dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return 0
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return AccountStoreManager.shared.accountStore.accounts(with: AccountStoreManager.shared.accountType()).count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: AccountTableViewCell.nibName, for: indexPath) as! AccountTableViewCell
+        
+        // セルにアカウントから取得したユーザ名をセット
+        cell.name.text = accounts?[indexPath.row].username
+        
+        guard let account = AccountStoreManager.shared.account else {
+            // アカウントが取得できなかった場合はユーザ名だけセットされた状態で返す
+            return cell
+        }
+        
+        // アイコンをセット
+        TwitterAPIManager.getUserIcon(account: account, completion: { (icon: String?) in
+            guard let safeIcon = icon else {
+                return
+            }
+            cell.icon.af_setImage(withURL:  URL(string: safeIcon)!)
+        })
+        
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 選択されたセルのアカウントをAccountStoreManagerのプロパティにセット
+        AccountStoreManager.shared.account = accounts?[indexPath.row]
+        // 自身を閉じる
+        dismiss(animated: true, completion: nil)
+    }
 
     /*
     // Override to support conditional editing of the table view.
