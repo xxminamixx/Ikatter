@@ -20,6 +20,7 @@
 		9D31D2B41EEE6DDB0068D7F5 /* TweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D31D2B31EEE6DDB0068D7F5 /* TweetView.swift */; };
 		9D31D2B61EEE71380068D7F5 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D31D2B51EEE71380068D7F5 /* TweetViewController.swift */; };
 		9D4C9F3F1EEE56A00020847C /* TweetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C9F3D1EEE56A00020847C /* TweetView.xib */; };
+		9D5700B31EF28EE00071DFB1 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5700B11EF28EE00071DFB1 /* ImageViewController.swift */; };
 		9D5EDBC41EEFDC400098FD74 /* UITextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5EDBC31EEFDC400098FD74 /* UITextViewExtension.swift */; };
 		9D5EDBC81EEFEA930098FD74 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5EDBC71EEFEA930098FD74 /* TabBarController.swift */; };
 		9D5EDBCA1EEFEAF40098FD74 /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5EDBC91EEFEAF40098FD74 /* DummyViewController.swift */; };
@@ -72,6 +73,7 @@
 		9D31D2B31EEE6DDB0068D7F5 /* TweetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetView.swift; path = View/TweetView.swift; sourceTree = "<group>"; };
 		9D31D2B51EEE71380068D7F5 /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		9D4C9F3D1EEE56A00020847C /* TweetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetView.xib; path = Controller/TweetView.xib; sourceTree = "<group>"; };
+		9D5700B11EF28EE00071DFB1 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewController.swift; path = View/ImageViewController.swift; sourceTree = "<group>"; };
 		9D5EDBC31EEFDC400098FD74 /* UITextViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITextViewExtension.swift; path = Utility/UITextViewExtension.swift; sourceTree = "<group>"; };
 		9D5EDBC71EEFEA930098FD74 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = Controller/TabBarController.swift; sourceTree = "<group>"; };
 		9D5EDBC91EEFEAF40098FD74 /* DummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DummyViewController.swift; path = Controller/DummyViewController.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				9D31D2B31EEE6DDB0068D7F5 /* TweetView.swift */,
 				9D5EDBCF1EF2324C0098FD74 /* AccountTableViewCell.swift */,
 				9D5EDBD01EF2324C0098FD74 /* AccountTableViewCell.xib */,
+				9D5700B11EF28EE00071DFB1 /* ImageViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 			files = (
 				9D5EDBD81EF247720098FD74 /* WaitContinuation.swift in Sources */,
 				9D8E08B21EEE9995003F85E3 /* TwitterAPIManager.swift in Sources */,
+				9D5700B31EF28EE00071DFB1 /* ImageViewController.swift in Sources */,
 				9D04925F1EA6090300EFC093 /* ViewController.swift in Sources */,
 				9DCFA6FF1EE8E0FE000D4B0C /* LinkHelper.swift in Sources */,
 				9D8E08B01EEE95AF003F85E3 /* AccountStoreManager.swift in Sources */,

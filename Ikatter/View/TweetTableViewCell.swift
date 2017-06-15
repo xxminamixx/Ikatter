@@ -18,7 +18,7 @@ protocol TweetTableViewCellDelegate {
     func pressdRetweet(cell: TweetTableViewCell)
     
     // 画像タップ時のメソッド
-    func upperLeftImageTapped(url: String)
+    func pressdUpperLeftImage(url: String)
 }
 
 class TweetTableViewCell: UITableViewCell {
@@ -76,19 +76,25 @@ class TweetTableViewCell: UITableViewCell {
         retweetButton.circleColor = ConstColor.green
         retweetButton.lineColor = ConstColor.green
         retweetButton.addTarget(self, action: #selector(retweet(sender:)), for: .touchUpInside)
+        
+        // 左上の画像タップ時のGestureを登録
+        let upperLeftImageTappGesture = UITapGestureRecognizer(target: self, action: #selector(upperLeftImageTapped))
+        
+        upperLeftImage.addGestureRecognizer(upperLeftImageTappGesture)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-//    // 左上の画像タップ時の処理
-//    @IBAction func upperLeftImageTapped(_ sender: Any) {
-//        guard let url = upperLeftImageURL else {
-//            return
-//        }
-//        delegate?.upperLeftImageTapped(url: url)
-//    }
+    // 左上の画像をタップした時に呼ばれる
+    func upperLeftImageTapped() {
+        guard let url = upperLeftImageURL else {
+            return
+        }
+        
+        delegate?.pressdUpperLeftImage(url: url)
+    }
     
     func setup(entity: TweetEntity) {
         name.text = entity.name

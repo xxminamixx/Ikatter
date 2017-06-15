@@ -235,12 +235,14 @@ extension ViewController: TweetTableViewCellDelegate {
     func pressdRetweet(cell: TweetTableViewCell) {
         
     }
-
-    func upperLeftImageTapped(url: String) {
-//        // 画面遷移して画像を表示
-//        let viewController = Bundle.main.loadNibNamed("ImageViewController", owner: self, options: nil)?[0] as! ImageViewController
-//        viewController.imageView.af_setImage(withURL: URL(string: url)!)
-        
+    
+    func pressdUpperLeftImage(url: String) {
+        // 画面遷移して画像を表示
+        let viewController = ImageViewController()
+        let imageView = UIImageView.init(frame: UIScreen.main.bounds)
+        imageView.af_setImage(withURL: URL(string: url)!)
+        viewController.view.addSubview(imageView)
+        present(viewController, animated: true, completion: nil)
     }
     
 }

@@ -30,7 +30,7 @@ class TwitterAPIManager {
         let swifter = Swifter(account: account)
         
         // タイムライン取得
-        swifter.getHomeTimeline(count: 10, sinceID: sinceId(), maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: true, success: { json in
+        swifter.getHomeTimeline(count: 30, sinceID: sinceId(), maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: true, success: { json in
             
             TwitterAPIManager.tweetParser(json: json, completion: completion)
             
