@@ -55,6 +55,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QBJ-HS-kc2">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="6yR-Cv-kkL"/>
                                     <constraint firstAttribute="width" constant="80" id="hGz-C4-7WL"/>
@@ -62,6 +63,7 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GXk-SK-BR2">
                                 <rect key="frame" x="90" y="0.0" width="80" height="80"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="ztm-C4-WvN"/>
                                 </constraints>
@@ -84,6 +86,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FIE-4j-iNA">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="8lK-Qv-K2z"/>
                                     <constraint firstAttribute="width" constant="80" id="Fha-57-d0L"/>
@@ -91,6 +94,7 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="36w-ge-uFS">
                                 <rect key="frame" x="90" y="0.0" width="80" height="80"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="zM5-Zg-rsf"/>
                                 </constraints>
@@ -155,7 +159,6 @@
                             <constraint firstAttribute="width" constant="30" id="jXT-7B-z8v"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <state key="normal" title="Button"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="heart.png"/>
                             <userDefinedRuntimeAttribute type="color" keyPath="imageColorOff">
@@ -200,6 +203,8 @@
                 <outlet property="favoriteButton" destination="Qbv-Wc-cPu" id="mVu-om-qdB"/>
                 <outlet property="icon" destination="Tqa-sO-F7O" id="WpB-iB-fQq"/>
                 <outlet property="name" destination="JBF-in-vcl" id="AiG-RX-KiN"/>
+                <outlet property="replyButton" destination="YwW-UI-XNj" id="xPO-MK-Thr"/>
+                <outlet property="retweetButton" destination="ltu-qa-LE4" id="dtk-gC-Fmh"/>
                 <outlet property="tweet" destination="JL9-ME-O9I" id="0tr-Xt-Bcg"/>
                 <outlet property="upperLeftImage" destination="QBJ-HS-kc2" id="1vd-PI-gu5"/>
                 <outlet property="upperRightImage" destination="GXk-SK-BR2" id="cvv-gV-QM2"/>

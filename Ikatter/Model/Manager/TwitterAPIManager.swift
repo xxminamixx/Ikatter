@@ -82,7 +82,34 @@ class TwitterAPIManager {
         let swifter = Swifter(account: account)
         swifter.unfavouriteTweet(forID: id)
     }
-
+    
+    
+    /// 指定ツイートをリツイートする
+    ///
+    /// - Parameter id: ツイートID
+    static func postRetweet(id: String) {
+        let manager = AccountStoreManager.shared
+        guard let account = manager.account else {
+            return
+        }
+        
+        let swifter = Swifter(account: account)
+        swifter.retweetTweet(forID: id)
+    }
+    
+    
+    /// 指定ツイートのリツイートを解除する
+    ///
+    /// - Parameter id: ツイートID
+    static func postUnRetweet(id: String) {
+        let manager = AccountStoreManager.shared
+        guard let account = manager.account else {
+            return
+        }
+        
+        let swifter = Swifter(account: account)
+        swifter.UnretweetTweet(forID: id)
+    }
     
     /// 最新のidを返す
     static func sinceId() -> String? {
@@ -103,6 +130,7 @@ class TwitterAPIManager {
             for tweet in tweetList {
                 let entity = TweetEntity()
                 entity.name = tweet["user"]["name"].string
+                entity.userID = tweet["user"]["screen_name"].string
                 entity.icon = tweet["user"]["profile_image_url_https"].string
                 entity.tweet = tweet["text"].string
                 entity.id = tweet["id_str"].string
@@ -139,7 +167,6 @@ class TwitterAPIManager {
         
         swifter.showUser(for: UserTag.screenName(account.username), success: { json in
             icon = json["profile_image_url_https"].string
-            
         }, failure: { error in
             icon = nil
         })

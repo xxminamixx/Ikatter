@@ -187,45 +187,8 @@ extension ViewController: UITableViewDataSource {
         // TweetEntityの並びでセルにデータをセット
         if TwitterAPIManager.tweetList.count > 0 {
             let tweet = TwitterAPIManager.tweetList[indexPath.row]
-            cell.name.text = tweet.name
-            cell.tweet.text = tweet.tweet
-            cell.tweet.sizeToFit()
-            
-            // アイコン画像セット
-            if let url = tweet.icon {
-                cell.icon.af_setImage(withURL: URL(string: url)!)
-            }
-            
-            // 右下の画像セット
-            if let url = tweet.buttomRightImage {
-                cell.ButtomRightImage.af_setImage(withURL: URL(string: url)!)
-            } else {
-                cell.buttonLeftWidthAlignRight()
-                cell.buttonRightWidth0()
-            }
-            
-            // 左下の画像セット
-            if let url = tweet.buttomLeftImage {
-                cell.ButtomLeftImage.af_setImage(withURL: URL(string: url)!)
-            } else {
-                cell.buttonLeftWidth0()
-                cell.buttomImageHeight0()
-            }
-            
-            // 右上の画像セット
-            if let url = tweet.upperRightImage {
-                cell.upperRightImage.af_setImage(withURL: URL(string: url)!)
-            } else {
-                cell.upperLeftWidthAlignRight()
-                cell.upperRightWidth0()
-            }
-            
-            // 左上の画像セット
-            if let url = tweet.upperLeftImage {
-                cell.upperLeftImage.af_setImage(withURL: URL(string: url)!)
-            } else {
-                cell.upperLeftWidth0()
-                cell.upperImageHeight0()
+            DispatchQueue.main.async {
+                cell.setup(entity: tweet)
             }
         }
         
@@ -257,6 +220,27 @@ extension ViewController: TweetTableViewCellDelegate {
         if let id = TwitterAPIManager.tweetList[(indexPath?.row)!].id {
             TwitterAPIManager.postUnFavorite(id: id)
         }
+    }
+    
+    func pressdReply(cell: TweetTableViewCell) {
+        let indexPath = tweetTableView.indexPath(for: cell)
+        if let userID = TwitterAPIManager.tweetList[(indexPath?.row)!].userID {
+            let viewController = storyboard?.instantiateViewController(withIdentifier: TweetViewController.nibName) as! TweetViewController
+            // 選択したセルのユーザIDをリプライ画面のプロパティにセット
+            viewController.userID = userID
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    func pressdRetweet(cell: TweetTableViewCell) {
+        
+    }
+
+    func upperLeftImageTapped(url: String) {
+//        // 画面遷移して画像を表示
+//        let viewController = Bundle.main.loadNibNamed("ImageViewController", owner: self, options: nil)?[0] as! ImageViewController
+//        viewController.imageView.af_setImage(withURL: URL(string: url)!)
+        
     }
     
 }

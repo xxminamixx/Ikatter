@@ -11,11 +11,24 @@ import Cartography
 import DOFavoriteButton
 
 protocol TweetTableViewCellDelegate {
+    // ボタンタップ時のメソッド
     func pressdFavorite(cell: TweetTableViewCell)
     func pressdUnFavorite(cell: TweetTableViewCell)
+    func pressdReply(cell: TweetTableViewCell)
+    func pressdRetweet(cell: TweetTableViewCell)
+    
+    // 画像タップ時のメソッド
+    func upperLeftImageTapped(url: String)
 }
 
 class TweetTableViewCell: UITableViewCell {
+    
+    enum ImageTouchTag: Int {
+        case upperLeft
+        case upperRight
+        case buttomLeft
+        case buttomRight
+    }
 
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var tweet: UILabel!
@@ -29,26 +42,107 @@ class TweetTableViewCell: UITableViewCell {
     
     /// お気に入りボタン
     @IBOutlet weak var favoriteButton: DOFavoriteButton!
+    /// リプライボタン
+    @IBOutlet weak var replyButton: DOFavoriteButton!
+    /// リツイートボタン
+    @IBOutlet weak var retweetButton: DOFavoriteButton!
     
+    var upperLeftImageURL: String?
+    var upperRightImageURL: String?
+    var buttomLeftImageURL: String?
+    var buttomRightImageURL: String?
     var delegate: TweetTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        favoriteButton.addTarget(self, action: Selector.init("tapped"), for: .touchUpInside)
+        
+        // お気に入りボタンの設定
         favoriteButton.imageColorOff = UIColor.gray
         favoriteButton.imageColorOn = ConstColor.pink
         favoriteButton.circleColor = ConstColor.pink
         favoriteButton.lineColor = ConstColor.pink
-        favoriteButton.addTarget(self, action: #selector(tapped(sender:)), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(favorite(sender:)), for: .touchUpInside)
+        
+        // リプライボタンの設定
+        replyButton.imageColorOff = UIColor.gray
+        replyButton.imageColorOn = ConstColor.skyBlue
+        replyButton.circleColor = ConstColor.skyBlue
+        replyButton.lineColor = ConstColor.skyBlue
+        replyButton.addTarget(self, action: #selector(reply(sender:)), for: .touchUpInside)
+        
+        // リツイートボタンの設定
+        retweetButton.imageColorOff = UIColor.gray
+        retweetButton.imageColorOn = ConstColor.green
+        retweetButton.circleColor = ConstColor.green
+        retweetButton.lineColor = ConstColor.green
+        retweetButton.addTarget(self, action: #selector(retweet(sender:)), for: .touchUpInside)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
+//    // 左上の画像タップ時の処理
+//    @IBAction func upperLeftImageTapped(_ sender: Any) {
+//        guard let url = upperLeftImageURL else {
+//            return
+//        }
+//        delegate?.upperLeftImageTapped(url: url)
+//    }
+    
+    func setup(entity: TweetEntity) {
+        name.text = entity.name
+        tweet.text = entity.tweet
+        tweet.sizeToFit()
+        
+        // アイコン画像セット
+        if let url = entity.icon {
+            self.icon.af_setImage(withURL: URL(string: url)!)
+        }
+        
+        // 右下の画像セット
+        if let url = entity.buttomRightImage {
+            buttomRightImageURL = url
+            self.ButtomRightImage.af_setImage(withURL: URL(string: url)!)
+        } else {
+            self.buttonLeftWidthAlignRight()
+            self.buttonRightWidth0()
+        }
+        
+        // 左下の画像セット
+        if let url = entity.buttomLeftImage {
+            buttomLeftImageURL = url
+            self.ButtomLeftImage.af_setImage(withURL: URL(string: url)!)
+        } else {
+            self.buttonLeftWidth0()
+            self.buttomImageHeight0()
+        }
+        
+        // 右上の画像セット
+        if let url = entity.upperRightImage {
+            upperRightImageURL = url
+            self.upperRightImage.af_setImage(withURL: URL(string: url)!)
+        } else {
+            self.upperLeftWidthAlignRight()
+            self.upperRightWidth0()
+        }
+        
+        // 左上の画像セット
+        if let url = entity.upperLeftImage {
+            upperLeftImageURL = url
+            self.upperLeftImage.af_setImage(withURL: URL(string: url)!)
+        } else {
+            self.upperLeftWidth0()
+            self.upperImageHeight0()
+        }
+
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+        
+    }
     
     /// お気に入りボタンが押された時の処理
-    func tapped(sender: DOFavoriteButton) {
+    func favorite(sender: DOFavoriteButton) {
         
         if sender.isSelected {
             // お気に入りを解除する
@@ -59,6 +153,29 @@ class TweetTableViewCell: UITableViewCell {
             // お気に入りする
             
             delegate?.pressdFavorite(cell: self)
+            sender.select()
+        }
+        
+    }
+    
+    /// リプライボタンが押された時の処理
+    func reply(sender: DOFavoriteButton) {
+        
+        if sender.isSelected {
+            sender.deselect()
+        } else {
+            delegate?.pressdReply(cell: self)
+            sender.select()
+        }
+        
+    }
+    
+    func retweet(sender: DOFavoriteButton) {
+        
+        if sender.isSelected {
+            sender.deselect()
+        } else {
+            delegate?.pressdRetweet(cell: self)
             sender.select()
         }
         

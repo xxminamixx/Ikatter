@@ -13,6 +13,7 @@ class TweetViewController: UIViewController {
     
     static let nibName = "TweetViewController"
     var tweetView: TweetView?
+    var userID: String?
     
     @IBOutlet weak var contentView: UIView!
     
@@ -25,7 +26,25 @@ class TweetViewController: UIViewController {
         // 各パーツの色設定
         tweetView?.backgroundColor = UIColor.darkGray
         tweetView?.photoButton.backgroundColor = UIColor.lightGray
+        tweetView?.photoButton.tintColor = UIColor.white
         tweetView?.tweetButton.backgroundColor = UIColor.lightGray
+        tweetView?.tweetButton.tintColor = UIColor.white
+        
+        // ユーザIDをTextViewにセット
+        if userID != nil {
+            tweetView?.textField.text = "@" + userID! + " "
+            tweetView?.tweetButton.setTitle("リプライ", for: .application)
+        }
+        
+        // アイコンをセット
+        if let account = AccountStoreManager.shared.account {
+            TwitterAPIManager.getUserIcon(account: account, completion: { (icon: String?) in
+                guard let safeIcon = icon else {
+                    return
+                }
+                self.tweetView?.icon.af_setImage(withURL: URL(string: safeIcon)!)
+            })
+        }
         
         self.contentView.addSubview(tweetView!)
         

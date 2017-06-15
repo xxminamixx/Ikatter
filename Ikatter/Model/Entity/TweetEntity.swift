@@ -11,6 +11,7 @@ import UIKit
 class TweetEntity: Comparable {
     var tweet: String?
     var name: String?
+    var userID: String?
     var icon: String?
     // ツイートid
     var id: String?

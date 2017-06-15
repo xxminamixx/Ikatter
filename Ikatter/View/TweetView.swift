@@ -43,22 +43,9 @@ class TweetView: UIView {
     }
  
     @IBAction func closeButton(_ sender: Any) {
-//        DispatchQueue.main.async {
-//            self.textField.becomeFirstResponder()
-//        }
-        
         delegate?.closeButtonTapped()
     }
 }
 
-extension TweetView: UITextViewDelegate {
-    
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//        if(text == "\n") {
-//            textView.resignFirstResponder()
-//            return false
-//        }
-//        return true
-//    }
-}
+extension TweetView: UITextViewDelegate {}
 
