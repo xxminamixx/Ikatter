@@ -77,12 +77,23 @@ class TwitterAPIManager {
             return
         }
         
-        swifter.showList(for: ListTag.id(id), success: { json in
-            print("jsonデータ -> \(json)")
-                TwitterAPIManager.tweetParser(json: json, completion: completion)
+        swifter.listTweets(for: ListTag.id(id), sinceID: sinceId(), maxID: nil, count: 30, includeEntities: true, includeRTs: true, success: { json in
+            // リストタイムライン取得時にtweetList初期化
+            // 他のAPIで取得したツイートと混同させないため
+            TwitterAPIManager.tweetList = [TweetEntity]()
+            TwitterAPIManager.tweetParser(json: json, completion: completion)
         }, failure: { error in
             print(error)
         })
+        
+//        swifter.listTweets(for: ListTag.id(id), success: { json in
+//            // リストタイムライン取得時にtweetList初期化
+//            // 他のAPIで取得したツイートと混同させないため
+//            TwitterAPIManager.tweetList = [TweetEntity]()
+//            TwitterAPIManager.tweetParser(json: json, completion: completion)
+//        }, failure: { error in
+//            print(error)
+//        })
     }
     
     /// お気に入り取得
@@ -208,7 +219,7 @@ class TwitterAPIManager {
                 let entity = ListEntity()
                 entity.id = list["id_str"].string
                 entity.name = list["name"].string
-                
+                entity.description = list["description"].string
                 // 同じリストIDがあったら追加しない
                 if TwitterAPIManager.listList.filter({$0.id == entity.id}).count == 0 {
                     TwitterAPIManager.listList.append(entity)

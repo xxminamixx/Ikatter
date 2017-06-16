@@ -1,17 +1,15 @@
 //
-//  ImageViewController.swift
+//  ListDummyViewController.swift
 //  Ikatter
 //
-//  Created by 南　京兵 on 2017/06/15.
+//  Created by 南　京兵 on 2017/06/16.
 //  Copyright © 2017年 南　京兵. All rights reserved.
 //
 
 import UIKit
 
-class ImageViewController: UIViewController {
+class ListDummyViewController: UIViewController {
 
-    static let nibName = "ImageViewController"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -19,5 +17,4 @@ class ImageViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 }

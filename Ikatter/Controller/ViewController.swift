@@ -1,4 +1,4 @@
-//
+ //
 //  ViewController.swift
 //  Ikatter
 //
@@ -68,11 +68,13 @@ class ViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        TwitterAPIManager.getTimeLine(completion: {
-            DispatchQueue.main.async {
-                self.tweetTableView.reloadData()
-            }
-        })
+        tweetTableView.reloadData()
+        // このAPIを呼びますみたいな入れ物があって、ここでそれを実行するだけにしたい
+//        TwitterAPIManager.getTimeLine(completion: {
+//            DispatchQueue.main.async {
+//                self.tweetTableView.reloadData()
+//            }
+//        })
 //        getFavorite()
     }
 
@@ -247,6 +249,22 @@ extension ViewController: TweetTableViewCellDelegate {
         imageView.af_setImage(withURL: URL(string: url)!)
         viewController.view.addSubview(imageView)
         present(viewController, animated: true, completion: nil)
+    }
+    
+}
+
+extension ViewController: ListTableViewControllerDelegate {
+    
+    func listTapped(id: String, completion: @escaping () -> Void) {
+        
+        TwitterAPIManager.showList(id: id, completion: {
+            completion()
+            DispatchQueue.main.async {
+                self.tweetTableView.reloadData()
+                // タイムラインタブ表示
+                self.tabBarController?.selectedIndex = 0
+            }
+        })
     }
     
 }

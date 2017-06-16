@@ -38,6 +38,7 @@
 		9DA82A741EF39B7C0079439F /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA82A731EF39B7C0079439F /* ListTableViewController.swift */; };
 		9DA82A771EF39C410079439F /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA82A751EF39C410079439F /* ListTableViewCell.swift */; };
 		9DA82A781EF39C410079439F /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA82A761EF39C410079439F /* ListTableViewCell.xib */; };
+		9DA82A7A1EF3BBE80079439F /* ListDummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA82A791EF3BBE80079439F /* ListDummyViewController.swift */; };
 		9DCFA6FF1EE8E0FE000D4B0C /* LinkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCFA6FE1EE8E0FE000D4B0C /* LinkHelper.swift */; };
 		9DD5C9FA1EE696BD003FC70A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5C9F91EE696BD003FC70A /* RealmManager.swift */; };
 		9DD5C9FE1EE7BA77003FC70A /* ConstColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5C9FD1EE7BA77003FC70A /* ConstColor.swift */; };
@@ -96,6 +97,7 @@
 		9DA82A731EF39B7C0079439F /* ListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTableViewController.swift; path = Controller/ListTableViewController.swift; sourceTree = "<group>"; };
 		9DA82A751EF39C410079439F /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTableViewCell.swift; path = View/ListTableViewCell.swift; sourceTree = "<group>"; };
 		9DA82A761EF39C410079439F /* ListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ListTableViewCell.xib; path = View/ListTableViewCell.xib; sourceTree = "<group>"; };
+		9DA82A791EF3BBE80079439F /* ListDummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListDummyViewController.swift; path = Controller/ListDummyViewController.swift; sourceTree = "<group>"; };
 		9DCFA6FE1EE8E0FE000D4B0C /* LinkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinkHelper.swift; path = Utility/LinkHelper.swift; sourceTree = "<group>"; };
 		9DD5C9F91EE696BD003FC70A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		9DD5C9FD1EE7BA77003FC70A /* ConstColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConstColor.swift; path = Utility/Const/ConstColor.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				9D5EDBC91EEFEAF40098FD74 /* DummyViewController.swift */,
 				9D5EDBCB1EF22E0A0098FD74 /* AccountNavigationController.swift */,
 				9D5EDBCD1EF22E5F0098FD74 /* AccountTableViewController.swift */,
+				9DA82A791EF3BBE80079439F /* ListDummyViewController.swift */,
 				9DA82A711EF39B530079439F /* ListNavigationController.swift */,
 				9DA82A731EF39B7C0079439F /* ListTableViewController.swift */,
 			);
@@ -492,6 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DA82A7A1EF3BBE80079439F /* ListDummyViewController.swift in Sources */,
 				9D5EDBD81EF247720098FD74 /* WaitContinuation.swift in Sources */,
 				9D8E08B21EEE9995003F85E3 /* TwitterAPIManager.swift in Sources */,
 				9D5700B31EF28EE00071DFB1 /* ImageViewController.swift in Sources */,
