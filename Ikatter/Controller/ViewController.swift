@@ -60,7 +60,6 @@ class ViewController: UIViewController {
                     self.tweetTableView.dg_stopLoading()
                 }
             })
-//            self.getFavorite()
         }, loadingView: loadingView)
         tweetTableView.dg_setPullToRefreshFillColor(ConstColor.skyBlue)
         tweetTableView.dg_setPullToRefreshBackgroundColor(tweetTableView.backgroundColor!)
