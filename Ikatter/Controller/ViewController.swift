@@ -48,6 +48,11 @@ class ViewController: UIViewController {
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         // インジケータの色を白に設定
         loadingView.tintColor = UIColor.white
+        
+        TwitterAPIManager.getlist(completion: {
+            
+        })
+        
         tweetTableView.dg_addPullToRefreshWithActionHandler({
             TwitterAPIManager.getTimeLine(completion: {
                 DispatchQueue.main.async {

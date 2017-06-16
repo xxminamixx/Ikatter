@@ -12,6 +12,19 @@ import Accounts
 class TwitterAPIManager {
     
     static var tweetList = [TweetEntity]()
+    static var listList = [ListEntity]()
+    
+    
+    /// swifterインスタンスを返す
+    ///
+    /// - Returns: 選択しているswifterインスタンス
+    static func swifter() -> Swifter? {
+        guard let account = AccountStoreManager.shared.account else {
+            return nil
+        }
+        
+        return Swifter(account: account)
+    }
     
     static func tweet(_ text: String) {
         guard let account = AccountStoreManager.shared.account else {
@@ -31,9 +44,42 @@ class TwitterAPIManager {
         
         // タイムライン取得
         swifter.getHomeTimeline(count: 30, sinceID: sinceId(), maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: true, success: { json in
-            
             TwitterAPIManager.tweetParser(json: json, completion: completion)
-            
+        }, failure: { error in
+            print(error)
+        })
+    }
+    
+    
+    /// リスト取得
+    ///
+    /// - Parameter completion: リスト取得後の処理
+    static func getlist(completion: @escaping () -> Void) {
+        guard let account = AccountStoreManager.shared.account else {
+            return
+        }
+        
+        let swifter = Swifter(account: account)
+        
+        swifter.getSubscribedLists(reverse: true, success: { json in
+            TwitterAPIManager.listParser(json: json, completion: completion)
+        }, failure: { error in
+            print(error)
+        })
+    }
+    
+    
+    /// 指定リストをTweetListに格納する
+    ///
+    /// - Parameter id: リストID
+    static func showList(id: String, completion: @escaping () -> Void) {
+        guard let swifter = TwitterAPIManager.swifter() else {
+            return
+        }
+        
+        swifter.showList(for: ListTag.id(id), success: { json in
+            print("jsonデータ -> \(json)")
+                TwitterAPIManager.tweetParser(json: json, completion: completion)
         }, failure: { error in
             print(error)
         })
@@ -153,6 +199,24 @@ class TwitterAPIManager {
             completion()
         }
         
+    }
+    
+    static func listParser(json: JSON, completion: () -> Void) {
+        
+        if let lists = json.array {
+            for list in lists {
+                let entity = ListEntity()
+                entity.id = list["id_str"].string
+                entity.name = list["name"].string
+                
+                // 同じリストIDがあったら追加しない
+                if TwitterAPIManager.listList.filter({$0.id == entity.id}).count == 0 {
+                    TwitterAPIManager.listList.append(entity)
+                }
+            }
+            completion()
+        }
+
     }
 
     /// ACAccountからiconのURL文字列を取得し、クロージャでそのURLを用いて行いたい処理を渡す

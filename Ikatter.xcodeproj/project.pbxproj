@@ -33,6 +33,7 @@
 		9D5EDBD81EF247720098FD74 /* WaitContinuation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5EDBD71EF247720098FD74 /* WaitContinuation.swift */; };
 		9D8E08B01EEE95AF003F85E3 /* AccountStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8E08AF1EEE95AF003F85E3 /* AccountStoreManager.swift */; };
 		9D8E08B21EEE9995003F85E3 /* TwitterAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8E08B11EEE9995003F85E3 /* TwitterAPIManager.swift */; };
+		9DA82A701EF391CA0079439F /* ListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA82A6F1EF391CA0079439F /* ListEntity.swift */; };
 		9DCFA6FF1EE8E0FE000D4B0C /* LinkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCFA6FE1EE8E0FE000D4B0C /* LinkHelper.swift */; };
 		9DD5C9FA1EE696BD003FC70A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5C9F91EE696BD003FC70A /* RealmManager.swift */; };
 		9DD5C9FE1EE7BA77003FC70A /* ConstColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5C9FD1EE7BA77003FC70A /* ConstColor.swift */; };
@@ -86,6 +87,7 @@
 		9D5EDBD71EF247720098FD74 /* WaitContinuation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaitContinuation.swift; path = Utility/WaitContinuation.swift; sourceTree = "<group>"; };
 		9D8E08AF1EEE95AF003F85E3 /* AccountStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountStoreManager.swift; path = Model/AccountStoreManager.swift; sourceTree = "<group>"; };
 		9D8E08B11EEE9995003F85E3 /* TwitterAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwitterAPIManager.swift; path = Model/Manager/TwitterAPIManager.swift; sourceTree = "<group>"; };
+		9DA82A6F1EF391CA0079439F /* ListEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListEntity.swift; path = Model/Entity/ListEntity.swift; sourceTree = "<group>"; };
 		9DCFA6FE1EE8E0FE000D4B0C /* LinkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinkHelper.swift; path = Utility/LinkHelper.swift; sourceTree = "<group>"; };
 		9DD5C9F91EE696BD003FC70A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		9DD5C9FD1EE7BA77003FC70A /* ConstColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConstColor.swift; path = Utility/Const/ConstColor.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				9D248D451EB0676200E9A907 /* TweetEntity.swift */,
+				9DA82A6F1EF391CA0079439F /* ListEntity.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				9D259B151EA601C8004A7FCA /* TweetTableViewCell.swift in Sources */,
 				9D248D461EB0676200E9A907 /* TweetEntity.swift in Sources */,
 				9D5EDBC41EEFDC400098FD74 /* UITextViewExtension.swift in Sources */,
+				9DA82A701EF391CA0079439F /* ListEntity.swift in Sources */,
 				9D5EDBC81EEFEA930098FD74 /* TabBarController.swift in Sources */,
 				9D31D2B41EEE6DDB0068D7F5 /* TweetView.swift in Sources */,
 				9D5EDBD11EF2324C0098FD74 /* AccountTableViewCell.swift in Sources */,
