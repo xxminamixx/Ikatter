@@ -49,18 +49,20 @@ class ViewController: UIViewController {
         // インジケータの色を白に設定
         loadingView.tintColor = UIColor.white
         
-        TwitterAPIManager.getlist(completion: {
-            
-        })
+        if let id = UserDefaults.standard.object(forKey: "listID") as? String {
+            tweetTableView.dg_addPullToRefreshWithActionHandler({
+                TwitterAPIManager.showList(id: id, completion: {
+                    DispatchQueue.main.async {
+                        self.tweetTableView.reloadData()
+                        self.tweetTableView.dg_stopLoading()
+                    }
+                })
+            }, loadingView: loadingView)
+        } else {
+            // リスト画面に遷移
+            tabBarController?.selectedIndex = 2
+        }
         
-        tweetTableView.dg_addPullToRefreshWithActionHandler({
-            TwitterAPIManager.getTimeLine(completion: {
-                DispatchQueue.main.async {
-                    self.tweetTableView.reloadData()
-                    self.tweetTableView.dg_stopLoading()
-                }
-            })
-        }, loadingView: loadingView)
         tweetTableView.dg_setPullToRefreshFillColor(ConstColor.skyBlue)
         tweetTableView.dg_setPullToRefreshBackgroundColor(tweetTableView.backgroundColor!)
         
@@ -68,16 +70,18 @@ class ViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        tweetTableView.reloadData()
-        // このAPIを呼びますみたいな入れ物があって、ここでそれを実行するだけにしたい
-//        TwitterAPIManager.getTimeLine(completion: {
-//            DispatchQueue.main.async {
-//                self.tweetTableView.reloadData()
-//            }
-//        })
-//        getFavorite()
+        
+        if let id = UserDefaults.standard.object(forKey: "listID") as? String {
+            TwitterAPIManager.showList(id: id, completion: {
+                DispatchQueue.main.async {
+                    self.tweetTableView.reloadData()
+                }
+            })
+        } else {
+            // リスト画面に遷移
+            tabBarController?.selectedIndex = 2
+        }
     }
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -256,6 +260,9 @@ extension ViewController: TweetTableViewCellDelegate {
 extension ViewController: ListTableViewControllerDelegate {
     
     func listTapped(id: String, completion: @escaping () -> Void) {
+        
+        // リストIDをNSURLDefaultsで永続化
+        UserDefaults.standard.set(id, forKey: "listID")
         
         TwitterAPIManager.showList(id: id, completion: {
             completion()

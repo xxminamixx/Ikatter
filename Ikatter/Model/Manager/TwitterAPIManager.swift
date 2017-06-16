@@ -14,7 +14,6 @@ class TwitterAPIManager {
     static var tweetList = [TweetEntity]()
     static var listList = [ListEntity]()
     
-    
     /// swifterインスタンスを返す
     ///
     /// - Returns: 選択しているswifterインスタンス
@@ -68,7 +67,6 @@ class TwitterAPIManager {
         })
     }
     
-    
     /// 指定リストをTweetListに格納する
     ///
     /// - Parameter id: リストID
@@ -86,14 +84,29 @@ class TwitterAPIManager {
             print(error)
         })
         
-//        swifter.listTweets(for: ListTag.id(id), success: { json in
-//            // リストタイムライン取得時にtweetList初期化
-//            // 他のAPIで取得したツイートと混同させないため
-//            TwitterAPIManager.tweetList = [TweetEntity]()
-//            TwitterAPIManager.tweetParser(json: json, completion: completion)
-//        }, failure: { error in
-//            print(error)
-//        })
+    }
+    
+    
+    /// リストを作成する
+    ///
+    /// - Parameters:
+    ///   - name: リスト名
+    ///   - description: リストの説明文
+    static func createList(name: String, description: String, isPublic: Bool){
+        guard let swifter = TwitterAPIManager.swifter() else {
+            return
+        }
+        
+        swifter.createList(named: name, description: description, success: { json in
+            
+        }, failure: { error in
+            
+        })
+        
+        swifter.createList(named: name, asPublicList: isPublic, description: description, success: { json in
+            print("jsonデータ -> \(json)")
+        }, failure: { error in
+        })
     }
     
     /// お気に入り取得
