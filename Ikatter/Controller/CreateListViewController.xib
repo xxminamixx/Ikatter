@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="ああああ" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9AE-EV-Jtk">
-                    <rect key="frame" x="0.0" y="53" width="375" height="150"/>
+                    <rect key="frame" x="0.0" y="113" width="375" height="150"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="150" id="2NP-Z8-H5U"/>
@@ -32,7 +32,7 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xg-Ou-zyY">
-                    <rect key="frame" x="0.0" y="206" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="266" width="375" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="公開" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcu-iv-Gc7">
                             <rect key="frame" x="17" y="16" width="35" height="21"/>
@@ -52,7 +52,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m66-Jy-VBS">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="60" width="375" height="50"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xwb-FK-WjK">
                             <rect key="frame" x="58" y="13" width="309" height="30"/>
@@ -81,11 +81,11 @@
                 <constraint firstItem="9AE-EV-Jtk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2ai-QB-VBQ"/>
                 <constraint firstItem="m66-Jy-VBS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ada-3q-JvX"/>
                 <constraint firstAttribute="trailing" secondItem="m66-Jy-VBS" secondAttribute="trailing" id="Fjp-cN-Ztt"/>
+                <constraint firstItem="m66-Jy-VBS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="bQ3-aV-GZ9"/>
                 <constraint firstItem="5xg-Ou-zyY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="d0W-jL-6RY"/>
                 <constraint firstAttribute="trailing" secondItem="5xg-Ou-zyY" secondAttribute="trailing" id="hSr-5l-peR"/>
                 <constraint firstAttribute="trailing" secondItem="9AE-EV-Jtk" secondAttribute="trailing" id="nb2-Ch-W79"/>
                 <constraint firstItem="9AE-EV-Jtk" firstAttribute="top" secondItem="m66-Jy-VBS" secondAttribute="bottom" constant="3" id="pbb-Xp-PNo"/>
-                <constraint firstItem="m66-Jy-VBS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sjb-xJ-B0K"/>
             </constraints>
             <point key="canvasLocation" x="34.5" y="125.5"/>
         </view>

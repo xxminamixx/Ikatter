@@ -36,9 +36,10 @@ extension UITabBarController: UITabBarControllerDelegate {
                 currentVC.present(navigationController, animated: true, completion: nil)
             }
             return false
-        } else if viewController is ListDummyViewController {
-            // list表示用のダミーViewControllerだった場合
+        } else if viewController is ListDummyViewController && !(self.selectedViewController is ListDummyViewController){
+            // list表示用のダミーViewControllerだった場合 且つ 表示中のViewControllerがlist表示ViewControllerじゃない時
             if let currentVC = self.selectedViewController {
+                
                 // 現在のViewControllerにListTableViewControllerをモーダル表示
                 let navigationController = ListNavigationController()
                 let listTableViewController = ListTableViewController()

@@ -31,7 +31,7 @@ class CreateListViewController: UIViewController {
         navigationItem.setLeftBarButtonItems([leftCloseButon], animated: true)
         
         // リスト保存ボタンセット
-        let rightSaveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(save))
+        let rightSaveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(save))
         navigationItem.setRightBarButtonItems([rightSaveButton], animated: true)
 
     }
@@ -48,6 +48,7 @@ class CreateListViewController: UIViewController {
     func save() {
         // リスト作成APIの呼び出し
         delegate?.createList(name: name.text!, text: text.text, isPublic: isPublic.isOn)
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

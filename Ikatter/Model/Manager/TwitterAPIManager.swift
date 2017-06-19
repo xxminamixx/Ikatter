@@ -92,13 +92,13 @@ class TwitterAPIManager {
     /// - Parameters:
     ///   - name: リスト名
     ///   - description: リストの説明文
-    static func createList(name: String, description: String, isPublic: Bool){
+    static func createList(name: String, description: String, isPublic: Bool, completion: @escaping () -> Void){
         guard let swifter = TwitterAPIManager.swifter() else {
             return
         }
         
         swifter.createList(named: name, description: description, success: { json in
-            
+            completion()
         }, failure: { error in
             
         })
@@ -106,6 +106,19 @@ class TwitterAPIManager {
         swifter.createList(named: name, asPublicList: isPublic, description: description, success: { json in
             print("jsonデータ -> \(json)")
         }, failure: { error in
+        })
+    }
+    
+    
+    static func deleteList(id: String, completion: @escaping () -> Void) {
+        guard let swifter = TwitterAPIManager.swifter() else {
+            return
+        }
+
+        swifter.deleteList(for: ListTag.id(id), success: { json in
+            completion()
+        }, failure: { error in
+        
         })
     }
     

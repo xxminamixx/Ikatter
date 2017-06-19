@@ -22,62 +22,103 @@ class ListTableViewController: UITableViewController {
         // tableViewの初期設定
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        let nib = UINib.init(nibName: ListTableViewCell.nibName, bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: ListTableViewCell.nibName)
+        let mainNib = UINib(nibName: ListTableViewCell.nibName, bundle: nil)
+        self.tableView.register(mainNib, forCellReuseIdentifier: ListTableViewCell.nibName)
+        let haederNib = UINib(nibName: CreateListTableViewCell.nibName, bundle: nil)
+        self.tableView.register(haederNib, forCellReuseIdentifier: CreateListTableViewCell.nibName)
         
+        // NavigationBarの右に確定ボタンを追加
         let rightCloseButon = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(close))
         navigationItem.setRightBarButtonItems([rightCloseButon], animated: true)
-
-        
+        // NavigationBarの左に編集ボタンを追加
+        navigationItem.leftBarButtonItem = editButtonItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         TwitterAPIManager.getlist {
             self.tableView.reloadData()
         }
-
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.isEditing = editing
+    }
+    
     // 自身を閉じる
     func close() {
+        self.tabBarController?.selectedIndex = 0
         self.dismiss(animated: true, completion: nil)
     }
 
     // MARK: TableViewDataSource
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TwitterAPIManager.listList.count
+        return TwitterAPIManager.listList.count + 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-        if indexPath.row == TwitterAPIManager.listList.count + 1 {
-            // 一番下のセルのとき、リスト作成用のセルを表示
-            let cell = UITableViewCell()
-            let label = UILabel()
-            label.text = "＋新しいリストを作る"
-            cell.addSubview(label)
+        if indexPath.row == TwitterAPIManager.listList.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CreateListTableViewCell.nibName, for: indexPath) as! CreateListTableViewCell
+            cell.name.text = "+新しいリストを作成する"
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.nibName, for: indexPath) as! ListTableViewCell
-            
+
             let entity = TwitterAPIManager.listList[indexPath.row]
             // リストの名前をセット
             cell.name.text = entity.name
             // リストの説明文をセット
             cell.subText.text = entity.description
-            
             return cell
         }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == TwitterAPIManager.listList.count {
+            // リスト作成セルを編集不可にする
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        guard let id = TwitterAPIManager.listList[indexPath.row].id else {
+            return
+        }
+        
+        TwitterAPIManager.deleteList(id: id, completion: {
+            // リスト管理配列からリストを削除
+            TwitterAPIManager.listList.remove(at: indexPath.row)
+            tableView.reloadData()
+        })
+        
     }
     
     // MARK: TableViewDelegate
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == TwitterAPIManager.listList.count + 1 {
-            // TODO: リスト作成画面遷移処理
+        if indexPath.row == TwitterAPIManager.listList.count {
+            // リスト作成画面へ遷移
+            let navigationController = CreateListNavigationController()
+            let viewController = CreateListViewController()
+            viewController.delegate = self
+            navigationController.addChildViewController(viewController)
+            
+            present(navigationController, animated: true, completion: nil)
         } else {
             guard let id = TwitterAPIManager.listList[indexPath.row].id else {
                 return
@@ -93,4 +134,15 @@ class ListTableViewController: UITableViewController {
 
     }
 
+}
+
+extension ListTableViewController: CreateListViewControllerDelegate {
+    
+    func createList(name: String, text: String, isPublic: Bool) {
+        // リスト作成APIの呼び出し
+        TwitterAPIManager.createList(name: name, description: text, isPublic: isPublic, completion: {
+            self.tableView.reloadData()
+        })
+    }
+    
 }
