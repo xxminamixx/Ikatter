@@ -28,5 +28,18 @@ class AddListMemberCollectionViewCell: UICollectionViewCell {
             self.icon.af_setImage(withURL: URL(string: icon)!)
         }
         
+        // チェックフラグがnil、またはfalseのときretrun
+        guard let isChecked = entity.isSelected, isChecked else {
+            return
+        }
+        
+        // TODO: うまく表示できないので修正する
+        // チェックされていたらチェックビューを表示する
+        let checkView = UIView()
+        checkView.backgroundColor = UIColor(red: 1.0, green: 0, blue: 0, alpha: 0.5)
+        icon.addSubview(checkView)
+        
+        self.layoutIfNeeded()
     }
+    
 }

@@ -15,17 +15,31 @@ class AddListMemberCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 背景色を白に設定
         self.collectionView?.backgroundColor = UIColor.white
 
         // コレクションビューの初期設定
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
+        collectionView?.isUserInteractionEnabled = true
         let nib = UINib.init(nibName: AddListMemberCollectionViewCell.nibName, bundle: nil)
         self.collectionView!.register(nib, forCellWithReuseIdentifier: AddListMemberCollectionViewCell.nibName)
+
+        // NavigationBarの右に完了ボタンを追加
+        let rightCompletionButon = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(completion))
+        navigationItem.setRightBarButtonItems([rightCompletionButon], animated: true)
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    
+    /// NavigationBarの右ボタンを押下した時の処理
+    func completion() {
+        // モーダルを閉じる
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: UICollectionViewDataSource
@@ -43,6 +57,7 @@ class AddListMemberCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddListMemberCollectionViewCell.nibName , for: indexPath) as! AddListMemberCollectionViewCell
         
         let entity = TwitterAPIManager.followingUserList[indexPath.row]
+        
         cell.setup(entity: entity)
         
         return cell
@@ -56,13 +71,13 @@ class AddListMemberCollectionViewController: UICollectionViewController {
         return true
     }
     */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
+    
+    override func collectionView(_: UICollectionView, didSelectItemAt: IndexPath) {
+        // タップしたセルの選択フラグを立てる
+        let entity = TwitterAPIManager.followingUserList[didSelectItemAt.row]
+        entity.isSelected = true
+        collectionView?.reloadData()
     }
-    */
 
     /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
