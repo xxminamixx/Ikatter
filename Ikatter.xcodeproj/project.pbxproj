@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9D04925F1EA6090300EFC093 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04925E1EA6090300EFC093 /* ViewController.swift */; };
-		9D0492611EA6171C00EFC093 /* TweetParseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0492601EA6171C00EFC093 /* TweetParseManager.swift */; };
 		9D248D461EB0676200E9A907 /* TweetEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D248D451EB0676200E9A907 /* TweetEntity.swift */; };
 		9D259AF11EA5D9E4004A7FCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D259AF01EA5D9E4004A7FCA /* AppDelegate.swift */; };
 		9D259AF61EA5D9E4004A7FCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D259AF41EA5D9E4004A7FCA /* Main.storyboard */; };
@@ -22,6 +21,11 @@
 		9D4C9F3F1EEE56A00020847C /* TweetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C9F3D1EEE56A00020847C /* TweetView.xib */; };
 		9D510F8D1EF788D50053AC6E /* CreateListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D510F8B1EF788D50053AC6E /* CreateListTableViewCell.swift */; };
 		9D510F8E1EF788D50053AC6E /* CreateListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D510F8C1EF788D50053AC6E /* CreateListTableViewCell.xib */; };
+		9D510F901EF79CFB0053AC6E /* AddListMemberNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D510F8F1EF79CFB0053AC6E /* AddListMemberNavigationController.swift */; };
+		9D510F921EF79D570053AC6E /* AddListMemberCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D510F911EF79D570053AC6E /* AddListMemberCollectionViewController.swift */; };
+		9D510F951EF79D780053AC6E /* AddListMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D510F931EF79D780053AC6E /* AddListMemberCollectionViewCell.swift */; };
+		9D510F961EF79D780053AC6E /* AddListMemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D510F941EF79D780053AC6E /* AddListMemberCollectionViewCell.xib */; };
+		9D510F981EF7A5590053AC6E /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D510F971EF7A5590053AC6E /* UserEntity.swift */; };
 		9D5700B31EF28EE00071DFB1 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5700B11EF28EE00071DFB1 /* ImageViewController.swift */; };
 		9D5EDBC41EEFDC400098FD74 /* UITextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5EDBC31EEFDC400098FD74 /* UITextViewExtension.swift */; };
 		9D5EDBC81EEFEA930098FD74 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5EDBC71EEFEA930098FD74 /* TabBarController.swift */; };
@@ -68,7 +72,6 @@
 		66978A191F134F31006E6D43 /* Pods_IkatterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IkatterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		795A72334118B3F400DF74FD /* Pods_Ikatter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ikatter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D04925E1EA6090300EFC093 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
-		9D0492601EA6171C00EFC093 /* TweetParseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetParseManager.swift; path = Model/Manager/TweetParseManager.swift; sourceTree = "<group>"; };
 		9D248D451EB0676200E9A907 /* TweetEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetEntity.swift; path = Model/Entity/TweetEntity.swift; sourceTree = "<group>"; };
 		9D259AED1EA5D9E4004A7FCA /* Ikatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ikatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D259AF01EA5D9E4004A7FCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +89,11 @@
 		9D4C9F3D1EEE56A00020847C /* TweetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetView.xib; path = Controller/TweetView.xib; sourceTree = "<group>"; };
 		9D510F8B1EF788D50053AC6E /* CreateListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateListTableViewCell.swift; path = View/CreateListTableViewCell.swift; sourceTree = "<group>"; };
 		9D510F8C1EF788D50053AC6E /* CreateListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CreateListTableViewCell.xib; path = View/CreateListTableViewCell.xib; sourceTree = "<group>"; };
+		9D510F8F1EF79CFB0053AC6E /* AddListMemberNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddListMemberNavigationController.swift; path = Controller/AddListMemberNavigationController.swift; sourceTree = "<group>"; };
+		9D510F911EF79D570053AC6E /* AddListMemberCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddListMemberCollectionViewController.swift; path = Controller/AddListMemberCollectionViewController.swift; sourceTree = "<group>"; };
+		9D510F931EF79D780053AC6E /* AddListMemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddListMemberCollectionViewCell.swift; path = Controller/AddListMemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		9D510F941EF79D780053AC6E /* AddListMemberCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddListMemberCollectionViewCell.xib; path = Controller/AddListMemberCollectionViewCell.xib; sourceTree = "<group>"; };
+		9D510F971EF7A5590053AC6E /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserEntity.swift; path = Model/Entity/UserEntity.swift; sourceTree = "<group>"; };
 		9D5700B11EF28EE00071DFB1 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewController.swift; path = View/ImageViewController.swift; sourceTree = "<group>"; };
 		9D5EDBC31EEFDC400098FD74 /* UITextViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITextViewExtension.swift; path = Utility/UITextViewExtension.swift; sourceTree = "<group>"; };
 		9D5EDBC71EEFEA930098FD74 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = Controller/TabBarController.swift; sourceTree = "<group>"; };
@@ -146,7 +154,6 @@
 		9D0492621EA6172000EFC093 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				9D0492601EA6171C00EFC093 /* TweetParseManager.swift */,
 				9DD5C9F91EE696BD003FC70A /* RealmManager.swift */,
 				9D8E08AF1EEE95AF003F85E3 /* AccountStoreManager.swift */,
 				9D8E08B11EEE9995003F85E3 /* TwitterAPIManager.swift */,
@@ -168,6 +175,7 @@
 			children = (
 				9D248D451EB0676200E9A907 /* TweetEntity.swift */,
 				9DA82A6F1EF391CA0079439F /* ListEntity.swift */,
+				9D510F971EF7A5590053AC6E /* UserEntity.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -309,6 +317,10 @@
 			isa = PBXGroup;
 			children = (
 				9D04925E1EA6090300EFC093 /* ViewController.swift */,
+				9D510F8F1EF79CFB0053AC6E /* AddListMemberNavigationController.swift */,
+				9D510F911EF79D570053AC6E /* AddListMemberCollectionViewController.swift */,
+				9D510F931EF79D780053AC6E /* AddListMemberCollectionViewCell.swift */,
+				9D510F941EF79D780053AC6E /* AddListMemberCollectionViewCell.xib */,
 			);
 			name = Timeline;
 			sourceTree = "<group>";
@@ -427,6 +439,7 @@
 				9D259AF81EA5D9E4004A7FCA /* Assets.xcassets in Resources */,
 				9D4C9F3F1EEE56A00020847C /* TweetView.xib in Resources */,
 				9D259AF61EA5D9E4004A7FCA /* Main.storyboard in Resources */,
+				9D510F961EF79D780053AC6E /* AddListMemberCollectionViewCell.xib in Resources */,
 				9DA82A781EF39C410079439F /* ListTableViewCell.xib in Resources */,
 				9D5EDBD41EF23C790098FD74 /* heart@2x.png in Resources */,
 				9DEAE3221EF3E02B006F0625 /* CreateListViewController.xib in Resources */,
@@ -546,6 +559,7 @@
 			files = (
 				9DA82A7A1EF3BBE80079439F /* ListDummyViewController.swift in Sources */,
 				9D5EDBD81EF247720098FD74 /* WaitContinuation.swift in Sources */,
+				9D510F921EF79D570053AC6E /* AddListMemberCollectionViewController.swift in Sources */,
 				9D8E08B21EEE9995003F85E3 /* TwitterAPIManager.swift in Sources */,
 				9D5700B31EF28EE00071DFB1 /* ImageViewController.swift in Sources */,
 				9D04925F1EA6090300EFC093 /* ViewController.swift in Sources */,
@@ -554,19 +568,21 @@
 				9DCFA6FF1EE8E0FE000D4B0C /* LinkHelper.swift in Sources */,
 				9D8E08B01EEE95AF003F85E3 /* AccountStoreManager.swift in Sources */,
 				9D31D2B61EEE71380068D7F5 /* TweetViewController.swift in Sources */,
-				9D0492611EA6171C00EFC093 /* TweetParseManager.swift in Sources */,
 				9D259AF11EA5D9E4004A7FCA /* AppDelegate.swift in Sources */,
 				9DA82A721EF39B530079439F /* ListNavigationController.swift in Sources */,
 				9D5EDBCC1EF22E0A0098FD74 /* AccountNavigationController.swift in Sources */,
+				9D510F981EF7A5590053AC6E /* UserEntity.swift in Sources */,
 				9DD5C9FE1EE7BA77003FC70A /* ConstColor.swift in Sources */,
 				9D5EDBCE1EF22E5F0098FD74 /* AccountTableViewController.swift in Sources */,
 				9D259B151EA601C8004A7FCA /* TweetTableViewCell.swift in Sources */,
 				9D248D461EB0676200E9A907 /* TweetEntity.swift in Sources */,
 				9DEAE31E1EF3E004006F0625 /* CreateListNavigationController.swift in Sources */,
 				9D5EDBC41EEFDC400098FD74 /* UITextViewExtension.swift in Sources */,
+				9D510F901EF79CFB0053AC6E /* AddListMemberNavigationController.swift in Sources */,
 				9DA82A771EF39C410079439F /* ListTableViewCell.swift in Sources */,
 				9DA82A701EF391CA0079439F /* ListEntity.swift in Sources */,
 				9DEAE3211EF3E02B006F0625 /* CreateListViewController.swift in Sources */,
+				9D510F951EF79D780053AC6E /* AddListMemberCollectionViewCell.swift in Sources */,
 				9D5EDBC81EEFEA930098FD74 /* TabBarController.swift in Sources */,
 				9D31D2B41EEE6DDB0068D7F5 /* TweetView.swift in Sources */,
 				9D5EDBD11EF2324C0098FD74 /* AccountTableViewCell.swift in Sources */,

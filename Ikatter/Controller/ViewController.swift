@@ -34,6 +34,11 @@ class ViewController: UIViewController {
         let rightTweetButtonItem = UIBarButtonItem(customView: rightTweetButton)
         self.navigationItem.setRightBarButtonItems([rightTweetButtonItem], animated: true)
         
+        // リストメンバ追加ボタンをNavigationBarの左に追加
+        let leftAddMemberButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addMember))
+        navigationItem.setLeftBarButtonItems([leftAddMemberButton], animated: true)
+
+        
         // ステージと武器一覧のTableViewの初期設定
         tweetTableView.dataSource = self
         tweetTableView.delegate = self
@@ -91,6 +96,25 @@ class ViewController: UIViewController {
     func tweet() {
         let viewController = storyboard?.instantiateViewController(withIdentifier: TweetViewController.nibName)
         self.present(viewController!, animated: true, completion: nil)
+    }
+    
+    // メンバ追加ボタン押下時の処理
+    func addMember() {
+        // TODO: フォローしている人を表示し選択したユーザをリストに追加する
+        // フォローしているユーザ表示画面へ遷移
+        // その画面内で選択したユーザをリストへ追加APIを投げる
+        let id = AccountStoreManager.shared.account?.identifier
+        TwitterAPIManager.getFollowing(id: id as! String, cursor: "-1", completion: {
+            let navigationController = AddListMemberNavigationController()
+            let layout = UICollectionViewFlowLayout()
+            layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            layout.itemSize = CGSize.init(width: 150, height: 150)
+            let viewController = AddListMemberCollectionViewController(collectionViewLayout: layout)
+            navigationController.addChildViewController(viewController)
+            
+            self.present(navigationController, animated: true, completion: nil)
+
+        })
     }
     
     // 端末に登録されているTwitterアカウント取得

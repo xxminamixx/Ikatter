@@ -13,6 +13,7 @@ class TwitterAPIManager {
     
     static var tweetList = [TweetEntity]()
     static var listList = [ListEntity]()
+    static var followingUserList = [UserEntity]()
     
     /// swifterインスタンスを返す
     ///
@@ -67,6 +68,36 @@ class TwitterAPIManager {
         })
     }
     
+    
+    /// フォローしているユーザを取得
+    ///
+    /// - Parameters:
+    ///   - id: ユーザID
+    ///   - cursor: ページングする際の取得開始位置
+    ///   - completion: フォローユーザ取得後の処理
+    static func getFollowing(id: String, cursor: String?, completion: @escaping () -> Void) {
+        guard let swifter = TwitterAPIManager.swifter() else {
+            return
+        }
+        
+        swifter.getUserFollowing(for: UserTag.id(id), cursor: cursor, count: 100, skipStatus: true, includeUserEntities: true, success: { (json, nowCousor, nextCousor) in
+            
+            if let next = nextCousor {
+                // 次の取得開始位置を更新
+                if next != "0" {
+                    TwitterAPIManager.getFollowing(id: id, cursor: next, completion: completion)
+                    TwitterAPIManager.UserParser(json: json)
+                } else {
+                    // 取得するフォローユーザがいない時クロージャを実行
+                    completion()
+                }
+            }
+            
+        }, failure: { error in
+            
+        })
+    }
+    
     /// 指定リストをTweetListに格納する
     ///
     /// - Parameter id: リストID
@@ -110,6 +141,11 @@ class TwitterAPIManager {
     }
     
     
+    /// リスト削除
+    ///
+    /// - Parameters:
+    ///   - id: 削除リストのID
+    ///   - completion: リスト削除後の処理
     static func deleteList(id: String, completion: @escaping () -> Void) {
         guard let swifter = TwitterAPIManager.swifter() else {
             return
@@ -119,6 +155,24 @@ class TwitterAPIManager {
             completion()
         }, failure: { error in
         
+        })
+    }
+    
+    /// リストにユーザを追加する
+    ///
+    /// - Parameters:
+    ///   - userID: ユーザID
+    ///   - listID: 追加先のリストID
+    ///   - completion: リスト追加後の処理
+    static func addListMember(userID: String, listID: String, completion: @escaping () -> Void) {
+        guard let swifter = TwitterAPIManager.swifter() else {
+            return
+        }
+        
+        swifter.addListMember(UserTag.id(userID), for: ListTag.id(listID), success: { json in
+            
+        }, failure: { error in
+            
         })
     }
     
@@ -254,6 +308,23 @@ class TwitterAPIManager {
             completion()
         }
 
+    }
+    
+    static func UserParser(json: JSON) {
+        
+        if let users = json.array {
+            for user in users {
+                let entity = UserEntity()
+                entity.id = user["id_str"].string
+                entity.name = user["name"].string
+                entity.text = user["description"].string
+                entity.icon = user["profile_image_url_https"].string
+                entity.header = user["profile_background_image_url_https"].string
+                
+                TwitterAPIManager.followingUserList.append(entity)
+            }
+        }
+        
     }
 
     /// ACAccountからiconのURL文字列を取得し、クロージャでそのURLを用いて行いたい処理を渡す
