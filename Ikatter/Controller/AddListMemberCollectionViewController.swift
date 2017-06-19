@@ -14,43 +14,28 @@ class AddListMemberCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.collectionView?.backgroundColor = UIColor.white
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        // コレクションビューの初期設定
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
-        // Register cell classes
         let nib = UINib.init(nibName: AddListMemberCollectionViewCell.nibName, bundle: nil)
         self.collectionView!.register(nib, forCellWithReuseIdentifier: AddListMemberCollectionViewCell.nibName)
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return TwitterAPIManager.followingUserList.count
     }
 

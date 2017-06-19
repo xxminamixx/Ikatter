@@ -100,9 +100,6 @@ class ViewController: UIViewController {
     
     // メンバ追加ボタン押下時の処理
     func addMember() {
-        // TODO: フォローしている人を表示し選択したユーザをリストに追加する
-        // フォローしているユーザ表示画面へ遷移
-        // その画面内で選択したユーザをリストへ追加APIを投げる
         let id = AccountStoreManager.shared.account?.identifier
         TwitterAPIManager.getFollowing(id: id as! String, cursor: "-1", completion: {
             let navigationController = AddListMemberNavigationController()
