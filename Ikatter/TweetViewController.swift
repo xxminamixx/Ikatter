@@ -25,9 +25,9 @@ class TweetViewController: UIViewController {
         
         // 各パーツの色設定
         tweetView?.backgroundColor = UIColor.darkGray
-        tweetView?.photoButton.backgroundColor = UIColor.lightGray
+        tweetView?.photoButton.backgroundColor = ConstColor.iconGreen
         tweetView?.photoButton.tintColor = UIColor.white
-        tweetView?.tweetButton.backgroundColor = UIColor.lightGray
+        tweetView?.tweetButton.backgroundColor = ConstColor.iconGreen
         tweetView?.tweetButton.tintColor = UIColor.white
         
         // ユーザIDをTextViewにセット
@@ -64,8 +64,17 @@ class TweetViewController: UIViewController {
 
 }
 
+// MARK: TweetViewDelegate
 extension TweetViewController: TweetViewDelegate {
+    
     func closeButtonTapped() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func tweetButtonTapped(text: String) {
+        TwitterAPIManager.tweet(text, completion: {
+            self.dismiss(animated: true, completion: nil)
+        })
+    }
+    
 }

@@ -55,13 +55,13 @@ class AccountTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AccountTableViewCell.nibName, for: indexPath) as! AccountTableViewCell
         
-        // セルにアカウントから取得したユーザ名をセット
-        cell.name.text = accounts?[indexPath.row].username
-        
-        guard let account = AccountStoreManager.shared.account else {
-            // アカウントが取得できなかった場合はユーザ名だけセットされた状態で返す
+        guard let account = accounts?[indexPath.row] else {
+            cell.name.text = "unknown"
             return cell
         }
+
+        // セルにアカウントから取得したユーザ名をセット
+        cell.name.text = account.username
         
         // アイコンをセット
         TwitterAPIManager.getUserIcon(account: account, completion: { (icon: String?) in

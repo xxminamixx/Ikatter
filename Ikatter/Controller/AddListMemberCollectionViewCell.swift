@@ -16,12 +16,14 @@ class AddListMemberCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var text: UILabel!
+    @IBOutlet weak var baseView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
     func setup(entity: UserEntity) {
+        baseView.backgroundColor = UIColor.white
         name.text = entity.name
         text.text = entity.text
         if let icon = entity.icon {
@@ -33,13 +35,7 @@ class AddListMemberCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        // TODO: うまく表示できないので修正する
-        // チェックされていたらチェックビューを表示する
-        let checkView = UIView()
-        checkView.backgroundColor = UIColor(red: 1.0, green: 0, blue: 0, alpha: 0.5)
-        icon.addSubview(checkView)
-        
-        self.layoutIfNeeded()
+        baseView.backgroundColor = UIColor.gray
     }
     
 }

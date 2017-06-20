@@ -9,9 +9,6 @@
 import UIKit
 import AlamofireImage
 import DGElasticPullToRefresh
-import Accounts
-import Swifter
-
 
 class ViewController: UIViewController {
     
@@ -22,7 +19,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        selectTwitterAccount()
+        // 初期アカウント設定
+        setupAccount()
         
 //        // サーチバーを表示
 //        setupSearchBar()
@@ -107,81 +105,49 @@ class ViewController: UIViewController {
             layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
             layout.itemSize = CGSize.init(width: 150, height: 150)
             let viewController = AddListMemberCollectionViewController(collectionViewLayout: layout)
+            viewController.delegate = self
             navigationController.addChildViewController(viewController)
             
             self.present(navigationController, animated: true, completion: nil)
-
         })
     }
     
-    // 端末に登録されているTwitterアカウント取得
-    private func selectTwitterAccount() {
-        
+    func setupAccount() {
         let manager = AccountStoreManager.shared
-        let accountType = manager.accountType()
-        
-        manager.accountStore.requestAccessToAccounts(with: accountType, options: nil, completion: { (granted, error) -> Void in
-           
-            // エラー発生
-            guard error == nil else {
-                return
-            }
-            
-            // アカウントの利用許可がされていない
-            guard granted else {
-                return
-            }
-            
-            
-            let defaults = UserDefaults.standard
-            if let accountIdentifire = defaults.object(forKey: "account") {
-                manager.account = manager.accountStore.account(withIdentifier: accountIdentifire as! String)
+        manager.getDeviceTwitterAccounts(completion:{
+            if manager.isSavedAccount() {
+                // アカウントが永続化されている
+                manager.setAccount(completion: {
+                    self.tweetTableView.reloadData()
+                })
             } else {
-                guard let accounts = manager.accountStore.accounts(with: accountType) else {
-                    return
+                // AlertControllerを表示しアカウントを選択させる
+                let alert = UIAlertController(title: "Twitter", message: "Choose an account", preferredStyle: .actionSheet)
+                
+                if let accounts = manager.getAccounts() {
+                    for account in accounts {
+                        alert.addAction(UIAlertAction(title: account.username,
+                                                      style: .default,
+                                                      handler: { (action) -> Void in
+                                                        
+                                                        // 自身のプロパティにセット
+                                                        manager.account = account
+                                                        
+                                                        // アカウントIDをNSURLDefaultsで永続化
+                                                        let userDefaults = UserDefaults.standard
+                                                        userDefaults.set(account.identifier, forKey: "account")
+                        }))
+                    }
                 }
                 
-                self.chooseAccount(accounts: (accounts as? [ACAccount])!)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: {
+                    self.tweetTableView.reloadData()
+                })
             }
-            
         })
-    }
-    
-    
-    /// 複数のTwitterアカウントから選択したアカウントを自身のプロパティにセットする
-    ///
-    /// - Parameter accounts: 端末に登録されているTiwtterアカウント配列
-    private func chooseAccount(accounts: [ACAccount]){
-        let manager = AccountStoreManager.shared
-        DispatchQueue.main.sync {
-            let alert = UIAlertController(title: "Twitter", message: "Choose an account", preferredStyle: .actionSheet)
-            
-            for account in accounts {
-                alert.addAction(UIAlertAction(title: account.username,
-                                              style: .default,
-                                              handler: { (action) -> Void in
-                                                
-                                                // 自身のプロパティにセット
-                                                manager.account = account
-                                                
-                                                // アカウントIDをNSURLDefaultsで永続化
-                                                let userDefaults = UserDefaults.standard
-                                                userDefaults.set(account.identifier, forKey: "account")
-                                                
-                                                TwitterAPIManager.getTimeLine(completion: {
-                                                    DispatchQueue.main.async {
-                                                        self.tweetTableView.reloadData()
-                                                    }
-                                                })
-                }))
-            }
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
 
     }
-    
     
     // MARK: サーチバーをナビゲーションバーに表示する
     private func setupSearchBar() {
@@ -295,4 +261,11 @@ extension ViewController: ListTableViewControllerDelegate {
         })
     }
     
+}
+ 
+extension ViewController: AddListMemberCollectionViewControlerDelegate {
+    func addedListMember(completion: () -> Void) {
+        tweetTableView.reloadData()
+        completion()
+    }
 }

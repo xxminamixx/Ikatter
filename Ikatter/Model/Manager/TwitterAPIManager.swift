@@ -26,13 +26,14 @@ class TwitterAPIManager {
         return Swifter(account: account)
     }
     
-    static func tweet(_ text: String) {
+    static func tweet(_ text: String, completion: () -> Void) {
         guard let account = AccountStoreManager.shared.account else {
             return
         }
         
         let swifter = Swifter.init(account: account)
         swifter.postTweet(status: text)
+        completion()
     }
     
     static func getTimeLine(completion: @escaping () -> Void) {
@@ -79,7 +80,7 @@ class TwitterAPIManager {
         guard let swifter = TwitterAPIManager.swifter() else {
             return
         }
-        
+
         swifter.getUserFollowing(for: UserTag.id(id), cursor: cursor, count: 100, skipStatus: true, includeUserEntities: true, success: { (json, nowCousor, nextCousor) in
             
             if let next = nextCousor {

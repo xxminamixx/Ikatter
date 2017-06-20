@@ -247,16 +247,22 @@
 		9D259B121EA60182004A7FCA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9D510F991EF9168D0053AC6E /* PostTweet */,
 				9D259AF91EA5D9E4004A7FCA /* LaunchScreen.storyboard */,
 				9D259AF41EA5D9E4004A7FCA /* Main.storyboard */,
-				9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */,
-				9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */,
-				9D31D2B51EEE71380068D7F5 /* TweetViewController.swift */,
-				9D4C9F3D1EEE56A00020847C /* TweetView.xib */,
-				9D31D2B31EEE6DDB0068D7F5 /* TweetView.swift */,
 				9D5700B11EF28EE00071DFB1 /* ImageViewController.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		9D510F991EF9168D0053AC6E /* PostTweet */ = {
+			isa = PBXGroup;
+			children = (
+				9D31D2B51EEE71380068D7F5 /* TweetViewController.swift */,
+				9D4C9F3D1EEE56A00020847C /* TweetView.xib */,
+				9D31D2B31EEE6DDB0068D7F5 /* TweetView.swift */,
+			);
+			name = PostTweet;
 			sourceTree = "<group>";
 		};
 		9DD5C9FB1EE7BA33003FC70A /* Utility */ = {
@@ -317,6 +323,8 @@
 			isa = PBXGroup;
 			children = (
 				9D04925E1EA6090300EFC093 /* ViewController.swift */,
+				9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */,
+				9D259B141EA601C8004A7FCA /* TweetTableViewCell.xib */,
 				9D510F8F1EF79CFB0053AC6E /* AddListMemberNavigationController.swift */,
 				9D510F911EF79D570053AC6E /* AddListMemberCollectionViewController.swift */,
 				9D510F931EF79D780053AC6E /* AddListMemberCollectionViewCell.swift */,

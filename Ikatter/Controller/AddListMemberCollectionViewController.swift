@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol AddListMemberCollectionViewControlerDelegate {
+    func addedListMember(completion: () -> Void)
+}
+
 private let reuseIdentifier = "Cell"
 
 class AddListMemberCollectionViewController: UICollectionViewController {
+    
+    var delegate: AddListMemberCollectionViewControlerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +44,21 @@ class AddListMemberCollectionViewController: UICollectionViewController {
     
     /// NavigationBarの右ボタンを押下した時の処理
     func completion() {
-        // モーダルを閉じる
-        dismiss(animated: true, completion: nil)
+        // TODO: ここでクラッシュするため修正
+        // フォローユーザ配列からチェックがされているユーザのみを抽出
+        let checkUsers = TwitterAPIManager.followingUserList.filter({$0.isSelected!})
+        // チェックされているユーザをリストに追加する
+        for checkUser in checkUsers {
+            let listID = UserDefaults.standard.object(forKey: "listID") as? String
+            TwitterAPIManager.addListMember(userID: checkUser.id!, listID: listID!, completion: {})
+        }
+        
+        // タイムラインを更新する
+        delegate?.addedListMember(completion: {
+            // モーダルを閉じる
+            dismiss(animated: true, completion: nil)
+        })
+        
     }
 
     // MARK: UICollectionViewDataSource

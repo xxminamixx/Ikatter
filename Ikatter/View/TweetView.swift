@@ -10,6 +10,7 @@ import UIKit
 
 protocol TweetViewDelegate {
     func closeButtonTapped()
+    func tweetButtonTapped(text: String)
 }
 
 class TweetView: UIView {
@@ -35,7 +36,8 @@ class TweetView: UIView {
     }
     
     @IBAction func tweetButton(_ sender: Any) {
-        TwitterAPIManager.tweet(textField.text)
+//        TwitterAPIManager.tweet(textField.text)
+        delegate?.tweetButtonTapped(text: textField.text)
     }
     
     @IBAction func textViewTapped(_ sender: Any) {
