@@ -16,6 +16,7 @@ protocol TweetTableViewCellDelegate {
     func pressdUnFavorite(cell: TweetTableViewCell)
     func pressdReply(cell: TweetTableViewCell)
     func pressdRetweet(cell: TweetTableViewCell)
+    func pressdUnRetweet(cell: TweetTableViewCell)
     
     // 画像タップ時のメソッド
     func pressdUpperLeftImage(url: String)
@@ -176,9 +177,12 @@ class TweetTableViewCell: UITableViewCell {
         
     }
     
+    
+    /// リツイートボタンが押された時の処理
     func retweet(sender: DOFavoriteButton) {
         
         if sender.isSelected {
+            delegate?.pressdUnRetweet(cell: self)
             sender.deselect()
         } else {
             delegate?.pressdRetweet(cell: self)

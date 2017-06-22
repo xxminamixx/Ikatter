@@ -130,6 +130,14 @@ class ListTableViewController: UITableViewController {
                     self.dismiss(animated: true, completion: nil)
                 }
             })
+            
+            guard let listName = TwitterAPIManager.listList[indexPath.row].name else {
+                return
+            }
+            
+            // 選択したリスト名を永続化
+            UserDefaults.standard.set(listName, forKey: "listName")
+
         }
 
     }
@@ -141,6 +149,7 @@ extension ListTableViewController: CreateListViewControllerDelegate {
     func createList(name: String, text: String, isPublic: Bool) {
         // リスト作成APIの呼び出し
         TwitterAPIManager.createList(name: name, description: text, isPublic: isPublic, completion: {
+            // TODO: リストを作成した時点で選択しているリストを新たに作ったリストにしておいた方が良い？
             self.tableView.reloadData()
         })
     }

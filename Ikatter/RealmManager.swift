@@ -9,5 +9,14 @@
 import RealmSwift
 
 class RealmManager: NSObject {
+    
+    // アカウント情報Entityを永続化
+    // Entity
+    // list id
+    // アカウントID
+    
+    // 起動時AccountStroeのアカウントIDを永続化
+    // リストがタップされたときに、現在のアカウントをRealmから検索し、listプロパティを更新
+    // UserDefaultで永続化しているアカウントIDをRealmから検索し、そのEntityのlistIDを表示する
 
 }

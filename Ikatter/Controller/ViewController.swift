@@ -1,4 +1,4 @@
- //
+//
 //  ViewController.swift
 //  Ikatter
 //
@@ -74,12 +74,19 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        // TODO: アカウントが切り替えられたときにデフォルトのリストを表示する
+        // TODO: アカウントごとにデフォルトのlistを永続化する必要がある。
         if let id = UserDefaults.standard.object(forKey: "listID") as? String {
             TwitterAPIManager.showList(id: id, completion: {
                 DispatchQueue.main.async {
                     self.tweetTableView.reloadData()
                 }
             })
+            
+            if let name = UserDefaults.standard.object(forKey: "listName") as? String {
+                navigationItem.title = name
+            }
+            
         } else {
             // リスト画面に遷移
             tabBarController?.selectedIndex = 2
@@ -230,7 +237,17 @@ extension ViewController: TweetTableViewCellDelegate {
     }
     
     func pressdRetweet(cell: TweetTableViewCell) {
-        
+        let indexPath = tweetTableView.indexPath(for: cell)
+        if let tweetID = TwitterAPIManager.tweetList[(indexPath?.row)!].id {
+            TwitterAPIManager.postRetweet(id: tweetID)
+        }
+    }
+    
+    func pressdUnRetweet(cell: TweetTableViewCell) {
+        let indexPath = tweetTableView.indexPath(for: cell)
+        if let tweetID = TwitterAPIManager.tweetList[(indexPath?.row)!].id {
+            TwitterAPIManager.postUnRetweet(id: tweetID)
+        }
     }
     
     func pressdUpperLeftImage(url: String) {

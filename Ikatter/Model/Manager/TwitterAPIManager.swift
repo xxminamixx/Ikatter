@@ -134,11 +134,6 @@ class TwitterAPIManager {
         }, failure: { error in
             
         })
-        
-        swifter.createList(named: name, asPublicList: isPublic, description: description, success: { json in
-            print("jsonデータ -> \(json)")
-        }, failure: { error in
-        })
     }
     
     

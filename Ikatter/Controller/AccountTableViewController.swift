@@ -77,6 +77,12 @@ class AccountTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 選択されたセルのアカウントをAccountStoreManagerのプロパティにセット
         AccountStoreManager.shared.account = accounts?[indexPath.row]
+        // アカウントIDを永続化
+        UserDefaults.standard.set(AccountStoreManager.shared.account?.identifier, forKey: "account")
+        // リスト配列を初期化
+        TwitterAPIManager.listList = [ListEntity]()
+        // ツイート配列初期化
+        TwitterAPIManager.tweetList = [TweetEntity]()
         // 自身を閉じる
         dismiss(animated: true, completion: nil)
     }

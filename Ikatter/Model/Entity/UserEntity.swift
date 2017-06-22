@@ -20,5 +20,5 @@ class UserEntity {
     /// ユーザヘッダー画像URL
     var header: String?
     /// コレクションビューで選択されているか判定
-    var isSelected: Bool?
+    var isSelected = false
 }

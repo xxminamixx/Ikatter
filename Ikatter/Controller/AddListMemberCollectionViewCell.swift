@@ -31,7 +31,7 @@ class AddListMemberCollectionViewCell: UICollectionViewCell {
         }
         
         // チェックフラグがnil、またはfalseのときretrun
-        guard let isChecked = entity.isSelected, isChecked else {
+        guard entity.isSelected else {
             return
         }
         
