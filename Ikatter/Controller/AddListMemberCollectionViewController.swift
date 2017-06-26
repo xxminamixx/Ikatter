@@ -44,7 +44,6 @@ class AddListMemberCollectionViewController: UICollectionViewController {
     
     /// NavigationBarの右ボタンを押下した時の処理
     func completion() {
-        // TODO: ここでクラッシュするため修正
         // フォローユーザ配列からチェックがされているユーザのみを抽出
         let checkUsers = TwitterAPIManager.followingUserList.filter({$0.isSelected == true})
         // チェックされているユーザをリストに追加する

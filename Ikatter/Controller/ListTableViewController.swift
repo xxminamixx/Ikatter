@@ -137,6 +137,13 @@ class ListTableViewController: UITableViewController {
             
             // 選択したリスト名を永続化
             UserDefaults.standard.set(listName, forKey: "listName")
+            let nowAccountID = UserDefaults.standard.object(forKey: "account") as? String
+            
+            
+            let entity = AccountDefaultListEntity()
+            entity.listID = listName
+            
+            
 
         }
 
