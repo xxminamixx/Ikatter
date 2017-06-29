@@ -63,5 +63,13 @@ class AccountStoreManager {
     func getAccounts() -> [ACAccount]? {
         return (accountStore.accounts(with: accountType()) as? [ACAccount]!)
     }
+    
+    
+    /// 現在のアカウントIDを返却する
+    ///
+    /// - Returns: アカウントID
+    func getIdentifier() -> String {
+        return (AccountStoreManager.shared.account?.identifier)! as String
+    }
 
 }

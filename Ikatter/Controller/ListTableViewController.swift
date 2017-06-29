@@ -142,9 +142,6 @@ class ListTableViewController: UITableViewController {
             
             let entity = AccountDefaultListEntity()
             entity.listID = listName
-            
-            
-
         }
 
     }

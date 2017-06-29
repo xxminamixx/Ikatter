@@ -11,6 +11,7 @@ import RealmSwift
 
 class AccountDefaultListEntity: Object {
     dynamic var listID: String?
+    dynamic var listName: String?
     dynamic var accountID: String?
     
     override static func primaryKey() -> String? {

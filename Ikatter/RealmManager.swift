@@ -14,7 +14,6 @@ class RealmManager: NSObject {
     
     lazy var realm = try! Realm()
     
-    
     func add(object: AccountDefaultListEntity) {
         try! realm.write {
             realm.add(object, update: true)
@@ -33,12 +32,23 @@ class RealmManager: NSObject {
     
     /// AccountDefaultListEntity配列を返す
     func allObject() -> Results<AccountDefaultListEntity> {
-        try! realm.objects(self.AccountDefaultListEntity)
+        return realm.objects(AccountDefaultListEntity.self)
     }
     
-    func getEntity(id: String)  {
-//        let a = allObject().filter("accounID == %@", id)
+    /// 指定されたアカウントIDのEntityを返す
+    ///
+    /// - Parameter id: アカウント
+    /// - Returns: アカウントに紐づいたAccountDefaultListEntity
+    func getEntity(id: String) -> AccountDefaultListEntity? {
+        guard let entity = realm.object(ofType: AccountDefaultListEntity.self, forPrimaryKey: id) else {
+            return nil
+        }
+        return entity
     }
+    
+//    func getEntity(id: String)  {
+//        let a = allObject().filter("accounID == %@", id)
+//    }
     
     // アカウント情報Entityを永続化
     // Entity

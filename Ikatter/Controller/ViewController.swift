@@ -80,14 +80,14 @@ class ViewController: UIViewController {
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         
         // TODO: アカウントが切り替えられたときにデフォルトのリストを表示する
         // TODO: アカウントごとにデフォルトのlistを永続化する必要がある。
         tweetTableView.reloadData()
-        if let id = UserDefaults.standard.object(forKey: "listID") as? String {
-            TwitterAPIManager.showList(id: id, completion: {
+        
+        if let entity = RealmManager.shared.getEntity(id: AccountStoreManager.shared.getIdentifier()) {
+            TwitterAPIManager.showList(id: entity.listID!, completion: {
                 DispatchQueue.main.async {
                     self.tweetTableView.reloadData()
                 }
@@ -102,6 +102,24 @@ class ViewController: UIViewController {
             tabBarController?.selectedIndex = 2
         }
     }
+    
+        // UserDefaultで永続化されたListIDを取得
+//        if let id = UserDefaults.standard.object(forKey: "listID") as? String {
+//            TwitterAPIManager.showList(id: id, completion: {
+//                DispatchQueue.main.async {
+//                    self.tweetTableView.reloadData()
+//                }
+//            })
+//            
+//            if let name = UserDefaults.standard.object(forKey: "listName") as? String {
+//                navigationItem.title = name
+//            }
+//            
+//        } else {
+//            // リスト画面に遷移
+//            tabBarController?.selectedIndex = 2
+//        }
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -277,6 +295,12 @@ extension ViewController: ListTableViewControllerDelegate {
         
         // リストIDをNSURLDefaultsで永続化
         UserDefaults.standard.set(id, forKey: "listID")
+        
+        // 今のアカウントにリストIDを紐づける
+        let accountListPair = RealmManager.shared.getEntity(id: AccountStoreManager.shared.getIdentifier())
+        RealmManager.shared.update({
+            accountListPair?.listID = id
+        })
         
         TwitterAPIManager.showList(id: id, completion: {
             completion()
