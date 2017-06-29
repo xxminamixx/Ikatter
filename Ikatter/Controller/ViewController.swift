@@ -23,12 +23,14 @@ class ViewController: UIViewController {
         // 初期アカウント設定
         setupAccount()
         
-        let accounts = AccountStoreManager.shared.getAccounts()
-        for account in accounts! {
-            let entity = AccountDefaultListEntity()
-            entity.accountID = account.identifier as String?
-            // アカウントストアのアカウントを全て永続化(重複IDは上書き)
-            RealmManager.shared.add(object: entity)
+        // OSからアカウントの取得ができたら
+        if let accounts = AccountStoreManager.shared.getAccounts() {
+            for account in accounts {
+                let entity = AccountDefaultListEntity()
+                entity.accountID = account.identifier as String?
+                // アカウントストアのアカウントを全て永続化(重複IDは上書き)
+                RealmManager.shared.add(object: entity)
+            }
         }
         
 //        // サーチバーを表示

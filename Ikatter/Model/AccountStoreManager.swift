@@ -61,7 +61,11 @@ class AccountStoreManager {
     ///
     /// - Returns: ACAccount配列
     func getAccounts() -> [ACAccount]? {
-        return (accountStore.accounts(with: accountType()) as? [ACAccount]!)
+        // TODO: アカウント利用許可がされていないとクラッシュする
+        guard let accounts = accountStore.accounts(with: accountType()) as? [ACAccount] else {
+            return nil
+        }
+        return accounts
     }
     
     

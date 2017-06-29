@@ -12,7 +12,11 @@ class RealmManager: NSObject {
     
     static let shared = RealmManager()
     
-    lazy var realm = try! Realm()
+    override init() {
+        realm = try! Realm()
+    }
+    
+    var realm: Realm!
     
     func add(object: AccountDefaultListEntity) {
         try! realm.write {
