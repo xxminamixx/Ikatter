@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ListTableViewControllerDelegate {
-    func listTapped(id: String, completion: @escaping () -> Void)
+    func listTapped(id: String, name: String, completion: @escaping () -> Void)
 }
 
 class ListTableViewController: UITableViewController {
@@ -120,28 +120,31 @@ class ListTableViewController: UITableViewController {
             
             present(navigationController, animated: true, completion: nil)
         } else {
+            
             guard let id = TwitterAPIManager.listList[indexPath.row].id else {
                 return
             }
+            
+            guard let listName = TwitterAPIManager.listList[indexPath.row].name else {
+                return
+            }
+            
             // リストセルをタップした時のデリゲートコール
-            delegate?.listTapped(id: id, completion: {
+            delegate?.listTapped(id: id, name: listName, completion: {
                 // デリゲートメソッドの処理が終わったらモーダルを閉じる
                 DispatchQueue.main.async {
                     self.dismiss(animated: true, completion: nil)
                 }
             })
             
-            guard let listName = TwitterAPIManager.listList[indexPath.row].name else {
-                return
-            }
             
-            // 選択したリスト名を永続化
-            UserDefaults.standard.set(listName, forKey: "listName")
-            let nowAccountID = UserDefaults.standard.object(forKey: "account") as? String
+//            // 選択したリスト名を永続化
+//            UserDefaults.standard.set(listName, forKey: "listName")
+//            let nowAccountID = UserDefaults.standard.object(forKey: "account") as? String
             
             
-            let entity = AccountDefaultListEntity()
-            entity.listID = listName
+//            let entity = AccountDefaultListEntity()
+//            entity.listID = listName
         }
 
     }

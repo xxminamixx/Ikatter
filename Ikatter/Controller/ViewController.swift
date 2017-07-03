@@ -26,10 +26,20 @@ class ViewController: UIViewController {
         // OSからアカウントの取得ができたら
         if let accounts = AccountStoreManager.shared.getAccounts() {
             for account in accounts {
-                let entity = AccountDefaultListEntity()
-                entity.accountID = account.identifier as String?
-                // アカウントストアのアカウントを全て永続化(重複IDは上書き)
-                RealmManager.shared.add(object: entity)
+
+                // アカウントIDに紐づいたエンティティが永続化されている場合
+                if RealmManager.shared.isExist(id: account.identifier as String) {
+                    
+                } else {
+                    let entity = AccountDefaultListEntity()
+                    entity.accountID = account.identifier as String?
+                    // アカウントストアのアカウントを全て永続化(重複IDは上書き)
+                    RealmManager.shared.add(object: entity)
+                }                
+//                let entity = AccountDefaultListEntity()
+//                entity.accountID = account.identifier as String?
+//                // アカウントストアのアカウントを全て永続化(重複IDは上書き)
+//                RealmManager.shared.add(object: entity)
             }
         }
         
@@ -89,7 +99,12 @@ class ViewController: UIViewController {
         tweetTableView.reloadData()
         
         if let entity = RealmManager.shared.getEntity(id: AccountStoreManager.shared.getIdentifier()) {
-            TwitterAPIManager.showList(id: entity.listID!, completion: {
+            
+            guard let id = entity.listID else {
+                return
+            }
+            
+            TwitterAPIManager.showList(id: id, completion: {
                 DispatchQueue.main.async {
                     self.tweetTableView.reloadData()
                 }
@@ -105,24 +120,6 @@ class ViewController: UIViewController {
         }
     }
     
-        // UserDefaultで永続化されたListIDを取得
-//        if let id = UserDefaults.standard.object(forKey: "listID") as? String {
-//            TwitterAPIManager.showList(id: id, completion: {
-//                DispatchQueue.main.async {
-//                    self.tweetTableView.reloadData()
-//                }
-//            })
-//            
-//            if let name = UserDefaults.standard.object(forKey: "listName") as? String {
-//                navigationItem.title = name
-//            }
-//            
-//        } else {
-//            // リスト画面に遷移
-//            tabBarController?.selectedIndex = 2
-//        }
-//    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -135,18 +132,19 @@ class ViewController: UIViewController {
     
     // メンバ追加ボタン押下時の処理
     func addMember() {
-        let id = AccountStoreManager.shared.account?.identifier
-        TwitterAPIManager.getFollowing(id: id as! String, cursor: "-1", completion: {
-            let navigationController = AddListMemberNavigationController()
-            let layout = UICollectionViewFlowLayout()
-            layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-            layout.itemSize = CGSize.init(width: 150, height: 150)
-            let viewController = AddListMemberCollectionViewController(collectionViewLayout: layout)
-            viewController.delegate = self
-            navigationController.addChildViewController(viewController)
-            
-            self.present(navigationController, animated: true, completion: nil)
-        })
+        if let id = AccountStoreManager.shared.account?.identifier as String? {
+            TwitterAPIManager.getFollowing(id: id as String, cursor: "-1", completion: {
+                let navigationController = AddListMemberNavigationController()
+                let layout = UICollectionViewFlowLayout()
+                layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                layout.itemSize = CGSize.init(width: 150, height: 150)
+                let viewController = AddListMemberCollectionViewController(collectionViewLayout: layout)
+                viewController.delegate = self
+                navigationController.addChildViewController(viewController)
+                
+                self.present(navigationController, animated: true, completion: nil)
+            })
+        }
     }
     
     func setupAccount() {
@@ -293,15 +291,16 @@ extension ViewController: TweetTableViewCellDelegate {
 
 extension ViewController: ListTableViewControllerDelegate {
     
-    func listTapped(id: String, completion: @escaping () -> Void) {
+    func listTapped(id: String, name: String, completion: @escaping () -> Void) {
         
         // リストIDをNSURLDefaultsで永続化
-        UserDefaults.standard.set(id, forKey: "listID")
+//        UserDefaults.standard.set(id, forKey: "listID")
         
         // 今のアカウントにリストIDを紐づける
         let accountListPair = RealmManager.shared.getEntity(id: AccountStoreManager.shared.getIdentifier())
         RealmManager.shared.update({
             accountListPair?.listID = id
+            accountListPair?.listName = name
         })
         
         TwitterAPIManager.showList(id: id, completion: {

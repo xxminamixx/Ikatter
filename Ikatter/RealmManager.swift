@@ -50,6 +50,18 @@ class RealmManager: NSObject {
         return entity
     }
     
+    /// 指定したアカウントIDのエンティティが存在するか判定
+    ///
+    /// - Parameter id: アカウントID
+    /// - Returns: アカウントIDに紐づいたエンティティの有無
+    func isExist(id: String) -> Bool {
+        guard getEntity(id: id) != nil else {
+            return false
+        }
+        
+        return true
+    }
+    
 //    func getEntity(id: String)  {
 //        let a = allObject().filter("accounID == %@", id)
 //    }
