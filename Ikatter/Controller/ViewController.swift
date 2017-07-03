@@ -35,11 +35,7 @@ class ViewController: UIViewController {
                     entity.accountID = account.identifier as String?
                     // アカウントストアのアカウントを全て永続化(重複IDは上書き)
                     RealmManager.shared.add(object: entity)
-                }                
-//                let entity = AccountDefaultListEntity()
-//                entity.accountID = account.identifier as String?
-//                // アカウントストアのアカウントを全て永続化(重複IDは上書き)
-//                RealmManager.shared.add(object: entity)
+                }
             }
         }
         
