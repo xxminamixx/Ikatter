@@ -137,6 +137,10 @@ class TweetTableViewCell: UITableViewCell {
         // 右下の画像セット
         if let url = entity.buttomRightImage {
             buttomRightImageURL = url
+            
+            
+            self.buttomLeftImageHeight80()
+            
             self.ButtomRightImage.af_setImage(withURL: URL(string: url)!)
         } else {
             self.buttonLeftWidthAlignRight()
@@ -148,7 +152,7 @@ class TweetTableViewCell: UITableViewCell {
             buttomLeftImageURL = url
             self.ButtomLeftImage.af_setImage(withURL: URL(string: url)!)
         } else {
-            self.buttonLeftWidth0()
+//            self.buttonLeftWidth0()
             self.buttomImageHeight0()
         }
         
@@ -166,7 +170,6 @@ class TweetTableViewCell: UITableViewCell {
             upperLeftImageURL = url
             self.upperLeftImage.af_setImage(withURL: URL(string: url)!)
         } else {
-            self.upperLeftWidth0()
             self.upperImageHeight0()
         }
 
@@ -233,11 +236,11 @@ extension TweetTableViewCell {
     }
     
     // 左下の画像の幅を0にする
-    func buttonLeftWidth0() {
-        constrain(ButtomLeftImage) { view in
-            view.width == 0
-        }
-    }
+//    func buttonLeftWidth0() {
+//        constrain(ButtomLeftImage) { view in
+//            view.width == 0
+//        }
+//    }
     
     // 右上の画像の幅を0にする
     func upperRightWidth0() {
@@ -247,11 +250,21 @@ extension TweetTableViewCell {
     }
     
     // 左上の画像の幅を0にする
-    func upperLeftWidth0() {
-        constrain(upperLeftImage) { view in
-            view.width == 0
-        }
-    }
+//    func upperLeftWidth0() {
+//        constrain(upperLeftImage) { view in
+//            view.width == 0
+//        }
+//    }
+    
+    /* 幅戻す系 */
+    
+//    func upperWidth() {
+//        constrain(upperRightImage) { view in
+//            
+//        }
+//
+//    }
+    
     
     /* 高さ0系 */
     
@@ -281,12 +294,44 @@ extension TweetTableViewCell {
         }
     }
     
+    /* 高さ戻す系 */
+    
+    func upperLeftImageHeight80() {
+        constrain(upperLeftImage) { view in
+            view.height == 80
+        }
+    }
+    
+    func upperRightImageHeight80() {
+        constrain(upperRightImage) { view in
+            view.height == 80
+        }
+    }
+    
+    func buttomLeftImageHeight80() {
+        constrain(ButtomLeftImage) { view in
+            view.height == 80
+        }
+    }
+    
+    func buttomRightImageHeight80() {
+        constrain(ButtomRightImage) { view in
+            view.height == 80
+        }
+    }
+    
     /* 整列系 */
     
     // 左下の画像の幅を右上の画像の右端に合わせる
     func buttonLeftWidthAlignRight() {
         constrain(ButtomLeftImage, upperRightImage) { view1, view2 in
             view1.right == view2.right
+        }
+    }
+    
+    func buttonRightWidthAlignLeft() {
+        constrain(upperLeftImage, ButtomRightImage) { view1, view2 in
+            view2.right == view2.right
         }
     }
     
