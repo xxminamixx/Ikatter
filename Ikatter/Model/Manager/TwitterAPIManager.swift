@@ -70,6 +70,28 @@ class TwitterAPIManager {
     }
     
     
+    /// リストメンバ取得
+    ///
+    /// - Parameters:
+    ///   - id: リストID
+    ///   - curser: 開始位置
+    ///   - completion: 取得後の処理
+    static func getListMembers(id: String, curser: String, completion: @escaping () -> Void) {
+        guard let swifter = TwitterAPIManager.swifter() else {
+            return
+        }
+        
+        swifter.getListMembers(for: ListTag.id(id), cursor: curser, includeEntities: true, skipStatus: true, success: {
+           json in
+            // TODO: パース処理
+            print(json)
+            completion()
+        }, failure: { error in
+            print(error)
+        })
+    }
+    
+    
     /// フォローしているユーザを取得
     ///
     /// - Parameters:
@@ -80,15 +102,16 @@ class TwitterAPIManager {
         guard let swifter = TwitterAPIManager.swifter() else {
             return
         }
-
+        
         swifter.getUserFollowing(for: UserTag.id(id), cursor: cursor, count: 100, skipStatus: true, includeUserEntities: true, success: { (json, nowCousor, nextCousor) in
             
             if let next = nextCousor {
                 // 次の取得開始位置を更新
-                if next != "0" {
-                    TwitterAPIManager.getFollowing(id: id, cursor: next, completion: completion)
-                    TwitterAPIManager.UserParser(json: json)
-                } else {
+                
+                TwitterAPIManager.getFollowing(id: id, cursor: next, completion: completion)
+                TwitterAPIManager.userParser(json: json)
+                
+                if next == "0" {
                     // 取得するフォローユーザがいない時クロージャを実行
                     completion()
                 }
@@ -107,7 +130,7 @@ class TwitterAPIManager {
             return
         }
         
-        swifter.listTweets(for: ListTag.id(id), sinceID: sinceId(), maxID: nil, count: 30, includeEntities: true, includeRTs: true, success: { json in
+        swifter.listTweets(for: ListTag.id(id), sinceID: sinceId(), maxID: nil, count: 30, includeEntities: true, includeRTs: false, success: { json in
             // リストタイムライン取得時にtweetList初期化
             // 他のAPIで取得したツイートと混同させないため
             TwitterAPIManager.tweetList = [TweetEntity]()
@@ -189,7 +212,7 @@ class TwitterAPIManager {
     /// 指定ツイートをお気に入りする
     ///
     /// - Parameter id: ツイートID
-    static func postFavorite(id: String) {
+    static func postFavorite(id: String, completion: () -> Void) {
         
         // アカウント情報がなかったら何もしない
         let manager = AccountStoreManager.shared
@@ -199,13 +222,14 @@ class TwitterAPIManager {
         
         let swifter = Swifter(account: account)
         swifter.favouriteTweet(forID: id)
+        completion()
         
     }
     
     /// 指定ツイートのお気に入りを解除する
     ///
     /// - Parameter id: ツイートID
-    static func postUnFavorite(id: String) {
+    static func postUnFavorite(id: String, completion: () -> Void) {
         // アカウント情報がなかったら何もしない
         let manager = AccountStoreManager.shared
         guard let account = manager.account else {
@@ -214,6 +238,7 @@ class TwitterAPIManager {
         
         let swifter = Swifter(account: account)
         swifter.unfavouriteTweet(forID: id)
+        completion()
     }
     
     
@@ -268,12 +293,32 @@ class TwitterAPIManager {
                 entity.tweet = tweet["text"].string
                 entity.id = tweet["id_str"].string
                 
+                entity.isFavorite = tweet["favorited"].bool!
+                entity.isRetweet = tweet["retweeted"].bool!
+                
+                entity.favoriteCount = String(describing: tweet["favorite_count"])
+                entity.retweetCount = String(describing: tweet["retweet_count"])
+                
                 // Tweetに含まれる画像urlをパース
                 let imageList = tweet["extended_entities"]["media"]
                 entity.upperLeftImage = imageList[0]["media_url_https"].string
                 entity.upperRightImage = imageList[1]["media_url_https"].string
                 entity.buttomLeftImage = imageList[2]["media_url_https"].string
                 entity.buttomRightImage = imageList[3]["media_url_https"].string
+                
+//                if let image = tweet["entities"]["media"] {
+//                    // 画像が1枚のとき
+//                    entity.upperLeftImage = image
+//                } else {
+//                    // 画像が複数枚のとき
+//                    
+//                    // Tweetに含まれる画像urlをパース
+//                    let imageList = tweet["extended_entities"]["media"]
+//                    entity.upperLeftImage = imageList[0]["media_url_https"].string
+//                    entity.upperRightImage = imageList[1]["media_url_https"].string
+//                    entity.buttomLeftImage = imageList[2]["media_url_https"].string
+//                    entity.buttomRightImage = imageList[3]["media_url_https"].string
+//                }
                 
                 // TODO: ここの処理重そうなので後で処理回数少なくする方法を考える
                 // 同じツイートidがあったら追加しない
@@ -306,7 +351,7 @@ class TwitterAPIManager {
 
     }
     
-    static func UserParser(json: JSON) {
+    static func userParser(json: JSON) {
         
         if let users = json.array {
             for user in users {

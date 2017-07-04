@@ -21,6 +21,16 @@ class TweetEntity: Comparable {
     var buttomLeftImage: String?
     var buttomRightImage: String?
     
+    // このツイートをお気に入りしているか
+    var isFavorite = false
+    // このツイートをリツイートしているか
+    var isRetweet = false
+    
+    // お気に入り件数
+    var favoriteCount: String?
+    // リツイート件数
+    var retweetCount: String?
+    
     static func == (lhs: TweetEntity, rhs: TweetEntity) -> Bool {
         return lhs.id == rhs.id
     }

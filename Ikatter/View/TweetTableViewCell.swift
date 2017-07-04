@@ -97,12 +97,37 @@ class TweetTableViewCell: UITableViewCell {
         delegate?.pressdUpperLeftImage(url: url)
     }
     
+    func reset() {
+        name.text = nil
+        tweet.text = nil
+        icon.image = nil
+        upperLeftImage.image = nil
+        upperRightImage.image = nil
+        ButtomLeftImage.image = nil
+        ButtomRightImage.image = nil
+        upperLeftImageURL = nil
+        upperRightImageURL = nil
+        buttomLeftImageURL = nil
+        buttomRightImageURL = nil
+        favoriteButton.isSelected = false
+        replyButton.isSelected = false
+        retweetButton.isSelected = false
+    }
+    
     func setup(entity: TweetEntity) {
         name.text = entity.name
         tweet.text = entity.tweet
         tweet.sizeToFit()
         
-        // TODO: お気に入り,リツイートのステータスでボタンの色を変えておく処理
+        // お気に入りされていたらボタン色をピンクに設定
+        if entity.isFavorite {
+            favoriteButton.select()
+        }
+
+        // リツイートしていたらボタン色を緑に設定
+        if entity.isRetweet {
+            retweetButton.select()
+        }
         
         // アイコン画像セット
         if let url = entity.icon {
@@ -173,6 +198,7 @@ class TweetTableViewCell: UITableViewCell {
         if sender.isSelected {
             sender.deselect()
         } else {
+            
             delegate?.pressdReply(cell: self)
             sender.select()
         }

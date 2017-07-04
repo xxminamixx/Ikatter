@@ -132,19 +132,8 @@ class ListTableViewController: UITableViewController {
             // リストセルをタップした時のデリゲートコール
             delegate?.listTapped(id: id, name: listName, completion: {
                 // デリゲートメソッドの処理が終わったらモーダルを閉じる
-                DispatchQueue.main.async {
                     self.dismiss(animated: true, completion: nil)
-                }
             })
-            
-            
-//            // 選択したリスト名を永続化
-//            UserDefaults.standard.set(listName, forKey: "listName")
-//            let nowAccountID = UserDefaults.standard.object(forKey: "account") as? String
-            
-            
-//            let entity = AccountDefaultListEntity()
-//            entity.listID = listName
         }
 
     }

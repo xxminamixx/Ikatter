@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F6D959BFF3D35E0E08F628E /* Pods_Lisner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57770C107513DA7FC9D5FD3A /* Pods_Lisner.framework */; };
 		9D04925F1EA6090300EFC093 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04925E1EA6090300EFC093 /* ViewController.swift */; };
 		9D248D461EB0676200E9A907 /* TweetEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D248D451EB0676200E9A907 /* TweetEntity.swift */; };
 		9D259AF11EA5D9E4004A7FCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D259AF01EA5D9E4004A7FCA /* AppDelegate.swift */; };
@@ -54,6 +55,7 @@
 		9DEAE3221EF3E02B006F0625 /* CreateListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEAE3201EF3E02B006F0625 /* CreateListViewController.xib */; };
 		A72A6F8B87FD5ED576733E3A /* Pods_IkatterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66978A191F134F31006E6D43 /* Pods_IkatterTests.framework */; };
 		DEE9491393BCBE3C1F80C081 /* Pods_Ikatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795A72334118B3F400DF74FD /* Pods_Ikatter.framework */; };
+		FE3C5876311D8189895693A3 /* Pods_LisnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 305DE28DE37F5CA2408F86EE /* Pods_LisnerTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +71,11 @@
 /* Begin PBXFileReference section */
 		0D479F06D49E1915967B424D /* Pods-IkatterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IkatterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IkatterTests/Pods-IkatterTests.release.xcconfig"; sourceTree = "<group>"; };
 		20DEF4D954CF4C1C00576156 /* Pods-IkatterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IkatterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IkatterTests/Pods-IkatterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		305DE28DE37F5CA2408F86EE /* Pods_LisnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LisnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		44FE99AED164D893FB620BBA /* Pods-LisnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LisnerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LisnerTests/Pods-LisnerTests.release.xcconfig"; sourceTree = "<group>"; };
+		57770C107513DA7FC9D5FD3A /* Pods_Lisner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lisner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3E77F51F5754D42FC0C71E /* Pods-Ikatter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ikatter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ikatter/Pods-Ikatter.debug.xcconfig"; sourceTree = "<group>"; };
+		619289C7F0D88A3F5A093034 /* Pods-Lisner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lisner/Pods-Lisner.debug.xcconfig"; sourceTree = "<group>"; };
 		66978A191F134F31006E6D43 /* Pods_IkatterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IkatterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		795A72334118B3F400DF74FD /* Pods_Ikatter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ikatter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D04925E1EA6090300EFC093 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +127,8 @@
 		9DEAE31D1EF3E004006F0625 /* CreateListNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateListNavigationController.swift; path = Controller/CreateListNavigationController.swift; sourceTree = "<group>"; };
 		9DEAE31F1EF3E02B006F0625 /* CreateListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateListViewController.swift; path = Controller/CreateListViewController.swift; sourceTree = "<group>"; };
 		9DEAE3201EF3E02B006F0625 /* CreateListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CreateListViewController.xib; path = Controller/CreateListViewController.xib; sourceTree = "<group>"; };
+		B1C0C46419C6854C2BB7A7D8 /* Pods-LisnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LisnerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LisnerTests/Pods-LisnerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B534C78C5BBE8FC040A5FFD6 /* Pods-Lisner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisner.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lisner/Pods-Lisner.release.xcconfig"; sourceTree = "<group>"; };
 		DFF69B8508139D24B6D7B1C5 /* Pods-Ikatter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ikatter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ikatter/Pods-Ikatter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEE9491393BCBE3C1F80C081 /* Pods_Ikatter.framework in Frameworks */,
+				5F6D959BFF3D35E0E08F628E /* Pods_Lisner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A72A6F8B87FD5ED576733E3A /* Pods_IkatterTests.framework in Frameworks */,
+				FE3C5876311D8189895693A3 /* Pods_LisnerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +159,8 @@
 			children = (
 				795A72334118B3F400DF74FD /* Pods_Ikatter.framework */,
 				66978A191F134F31006E6D43 /* Pods_IkatterTests.framework */,
+				57770C107513DA7FC9D5FD3A /* Pods_Lisner.framework */,
+				305DE28DE37F5CA2408F86EE /* Pods_LisnerTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -353,6 +365,10 @@
 				DFF69B8508139D24B6D7B1C5 /* Pods-Ikatter.release.xcconfig */,
 				20DEF4D954CF4C1C00576156 /* Pods-IkatterTests.debug.xcconfig */,
 				0D479F06D49E1915967B424D /* Pods-IkatterTests.release.xcconfig */,
+				619289C7F0D88A3F5A093034 /* Pods-Lisner.debug.xcconfig */,
+				B534C78C5BBE8FC040A5FFD6 /* Pods-Lisner.release.xcconfig */,
+				B1C0C46419C6854C2BB7A7D8 /* Pods-LisnerTests.debug.xcconfig */,
+				44FE99AED164D893FB620BBA /* Pods-LisnerTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -483,7 +499,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IkatterTests/Pods-IkatterTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LisnerTests/Pods-LisnerTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B28B2176EFC082A478AF74A2 /* [CP] Check Pods Manifest.lock */ = {
@@ -528,7 +544,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IkatterTests/Pods-IkatterTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LisnerTests/Pods-LisnerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C7020344709D81B236A8DF0B /* [CP] Copy Pods Resources */ = {
@@ -543,7 +559,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ikatter/Pods-Ikatter-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lisner/Pods-Lisner-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FF6B3C3A807A562DBF54CDC7 /* [CP] Embed Pods Frameworks */ = {
@@ -558,7 +574,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ikatter/Pods-Ikatter-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lisner/Pods-Lisner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -736,7 +752,7 @@
 		};
 		9D259B0B1EA5D9E4004A7FCA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E3E77F51F5754D42FC0C71E /* Pods-Ikatter.debug.xcconfig */;
+			baseConfigurationReference = 619289C7F0D88A3F5A093034 /* Pods-Lisner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Ikatter/Info.plist;
@@ -749,7 +765,7 @@
 		};
 		9D259B0C1EA5D9E4004A7FCA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DFF69B8508139D24B6D7B1C5 /* Pods-Ikatter.release.xcconfig */;
+			baseConfigurationReference = B534C78C5BBE8FC040A5FFD6 /* Pods-Lisner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Ikatter/Info.plist;
@@ -762,7 +778,7 @@
 		};
 		9D259B0E1EA5D9E4004A7FCA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20DEF4D954CF4C1C00576156 /* Pods-IkatterTests.debug.xcconfig */;
+			baseConfigurationReference = B1C0C46419C6854C2BB7A7D8 /* Pods-LisnerTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -777,7 +793,7 @@
 		};
 		9D259B0F1EA5D9E4004A7FCA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D479F06D49E1915967B424D /* Pods-IkatterTests.release.xcconfig */;
+			baseConfigurationReference = 44FE99AED164D893FB620BBA /* Pods-LisnerTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

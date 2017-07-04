@@ -72,10 +72,8 @@ class ViewController: UIViewController {
         if let id = UserDefaults.standard.object(forKey: "listID") as? String {
             tweetTableView.dg_addPullToRefreshWithActionHandler({
                 TwitterAPIManager.showList(id: id, completion: {
-                    DispatchQueue.main.async {
                         self.tweetTableView.reloadData()
                         self.tweetTableView.dg_stopLoading()
-                    }
                 })
             }, loadingView: loadingView)
         } else {
@@ -101,12 +99,14 @@ class ViewController: UIViewController {
             }
             
             TwitterAPIManager.showList(id: id, completion: {
-                DispatchQueue.main.async {
                     self.tweetTableView.reloadData()
-                }
             })
             
-            if let name = UserDefaults.standard.object(forKey: "listName") as? String {
+//            if let name = UserDefaults.standard.object(forKey: "listName") as? String {
+//                navigationItem.title = name
+//            }
+            
+            if let name = entity.listName {
                 navigationItem.title = name
             }
             
@@ -207,17 +207,14 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell", for: indexPath) as! TweetTableViewCell
-        
         // MARK: セルのセットアップ
-        
+        cell.reset()
         cell.delegate = self
         
         // TweetEntityの並びでセルにデータをセット
         if TwitterAPIManager.tweetList.count > 0 {
             let tweet = TwitterAPIManager.tweetList[indexPath.row]
-            DispatchQueue.main.async {
                 cell.setup(entity: tweet)
-            }
         }
         
         return cell
@@ -238,7 +235,10 @@ extension ViewController: TweetTableViewCellDelegate {
     func pressdFavorite(cell: TweetTableViewCell) {
         let indexPath = tweetTableView.indexPath(for: cell)
         if let id =  TwitterAPIManager.tweetList[(indexPath?.row)!].id {
-            TwitterAPIManager.postFavorite(id: id)
+            TwitterAPIManager.postFavorite(id: id, completion: {
+                // お気に入りフラグを立てる
+                TwitterAPIManager.tweetList[(indexPath?.row)!].isFavorite = true
+            })
         }
     }
     
@@ -246,7 +246,9 @@ extension ViewController: TweetTableViewCellDelegate {
     func pressdUnFavorite(cell: TweetTableViewCell) {
         let indexPath = tweetTableView.indexPath(for: cell)
         if let id = TwitterAPIManager.tweetList[(indexPath?.row)!].id {
-            TwitterAPIManager.postUnFavorite(id: id)
+            TwitterAPIManager.postUnFavorite(id: id, completion: {
+                TwitterAPIManager.tweetList[(indexPath?.row)!].isFavorite = false
+            })
         }
     }
     
@@ -301,11 +303,9 @@ extension ViewController: ListTableViewControllerDelegate {
         
         TwitterAPIManager.showList(id: id, completion: {
             completion()
-            DispatchQueue.main.async {
-                self.tweetTableView.reloadData()
+            self.tweetTableView.reloadData()
                 // タイムラインタブ表示
-                self.tabBarController?.selectedIndex = 0
-            }
+            self.tabBarController?.selectedIndex = 0
         })
     }
     
