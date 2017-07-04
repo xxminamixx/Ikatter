@@ -102,6 +102,8 @@ class TweetTableViewCell: UITableViewCell {
         tweet.text = entity.tweet
         tweet.sizeToFit()
         
+        // TODO: お気に入り,リツイートのステータスでボタンの色を変えておく処理
+        
         // アイコン画像セット
         if let url = entity.icon {
             self.icon.af_setImage(withURL: URL(string: url)!)

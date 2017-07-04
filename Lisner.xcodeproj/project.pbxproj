@@ -74,13 +74,13 @@
 		795A72334118B3F400DF74FD /* Pods_Ikatter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ikatter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D04925E1EA6090300EFC093 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
 		9D248D451EB0676200E9A907 /* TweetEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetEntity.swift; path = Model/Entity/TweetEntity.swift; sourceTree = "<group>"; };
-		9D259AED1EA5D9E4004A7FCA /* Ikatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ikatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D259AED1EA5D9E4004A7FCA /* Lisner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lisner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D259AF01EA5D9E4004A7FCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D259AF51EA5D9E4004A7FCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9D259AF71EA5D9E4004A7FCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D259AFA1EA5D9E4004A7FCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D259AFC1EA5D9E4004A7FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9D259B011EA5D9E4004A7FCA /* IkatterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IkatterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D259B011EA5D9E4004A7FCA /* LisnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LisnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D259B051EA5D9E4004A7FCA /* IkatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IkatterTests.swift; sourceTree = "<group>"; };
 		9D259B071EA5D9E4004A7FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D259B131EA601C8004A7FCA /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetTableViewCell.swift; path = View/TweetTableViewCell.swift; sourceTree = "<group>"; };
@@ -197,8 +197,8 @@
 		9D259AEE1EA5D9E4004A7FCA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9D259AED1EA5D9E4004A7FCA /* Ikatter.app */,
-				9D259B011EA5D9E4004A7FCA /* IkatterTests.xctest */,
+				9D259AED1EA5D9E4004A7FCA /* Lisner.app */,
+				9D259B011EA5D9E4004A7FCA /* LisnerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -360,9 +360,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9D259AEC1EA5D9E4004A7FCA /* Ikatter */ = {
+		9D259AEC1EA5D9E4004A7FCA /* Lisner */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9D259B0A1EA5D9E4004A7FCA /* Build configuration list for PBXNativeTarget "Ikatter" */;
+			buildConfigurationList = 9D259B0A1EA5D9E4004A7FCA /* Build configuration list for PBXNativeTarget "Lisner" */;
 			buildPhases = (
 				B646D516202939FE4F081EDA /* [CP] Check Pods Manifest.lock */,
 				9D259AE91EA5D9E4004A7FCA /* Sources */,
@@ -375,14 +375,14 @@
 			);
 			dependencies = (
 			);
-			name = Ikatter;
+			name = Lisner;
 			productName = Ikatter;
-			productReference = 9D259AED1EA5D9E4004A7FCA /* Ikatter.app */;
+			productReference = 9D259AED1EA5D9E4004A7FCA /* Lisner.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9D259B001EA5D9E4004A7FCA /* IkatterTests */ = {
+		9D259B001EA5D9E4004A7FCA /* LisnerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9D259B0D1EA5D9E4004A7FCA /* Build configuration list for PBXNativeTarget "IkatterTests" */;
+			buildConfigurationList = 9D259B0D1EA5D9E4004A7FCA /* Build configuration list for PBXNativeTarget "LisnerTests" */;
 			buildPhases = (
 				B28B2176EFC082A478AF74A2 /* [CP] Check Pods Manifest.lock */,
 				9D259AFD1EA5D9E4004A7FCA /* Sources */,
@@ -396,9 +396,9 @@
 			dependencies = (
 				9D259B031EA5D9E4004A7FCA /* PBXTargetDependency */,
 			);
-			name = IkatterTests;
+			name = LisnerTests;
 			productName = IkatterTests;
-			productReference = 9D259B011EA5D9E4004A7FCA /* IkatterTests.xctest */;
+			productReference = 9D259B011EA5D9E4004A7FCA /* LisnerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -422,7 +422,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9D259AE81EA5D9E4004A7FCA /* Build configuration list for PBXProject "Ikatter" */;
+			buildConfigurationList = 9D259AE81EA5D9E4004A7FCA /* Build configuration list for PBXProject "Lisner" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -435,8 +435,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9D259AEC1EA5D9E4004A7FCA /* Ikatter */,
-				9D259B001EA5D9E4004A7FCA /* IkatterTests */,
+				9D259AEC1EA5D9E4004A7FCA /* Lisner */,
+				9D259B001EA5D9E4004A7FCA /* LisnerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -616,7 +616,7 @@
 /* Begin PBXTargetDependency section */
 		9D259B031EA5D9E4004A7FCA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9D259AEC1EA5D9E4004A7FCA /* Ikatter */;
+			target = 9D259AEC1EA5D9E4004A7FCA /* Lisner */;
 			targetProxy = 9D259B021EA5D9E4004A7FCA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -771,7 +771,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.spl.ikatter.IkatterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ikatter.app/Ikatter";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lisner.app/Lisner";
 			};
 			name = Debug;
 		};
@@ -786,14 +786,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.spl.ikatter.IkatterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ikatter.app/Ikatter";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lisner.app/Lisner";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9D259AE81EA5D9E4004A7FCA /* Build configuration list for PBXProject "Ikatter" */ = {
+		9D259AE81EA5D9E4004A7FCA /* Build configuration list for PBXProject "Lisner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9D259B081EA5D9E4004A7FCA /* Debug */,
@@ -802,7 +802,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9D259B0A1EA5D9E4004A7FCA /* Build configuration list for PBXNativeTarget "Ikatter" */ = {
+		9D259B0A1EA5D9E4004A7FCA /* Build configuration list for PBXNativeTarget "Lisner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9D259B0B1EA5D9E4004A7FCA /* Debug */,
@@ -811,7 +811,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9D259B0D1EA5D9E4004A7FCA /* Build configuration list for PBXNativeTarget "IkatterTests" */ = {
+		9D259B0D1EA5D9E4004A7FCA /* Build configuration list for PBXNativeTarget "LisnerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9D259B0E1EA5D9E4004A7FCA /* Debug */,
