@@ -11,9 +11,17 @@ import Accounts
 
 class TwitterAPIManager {
     
+    // ユーザパース時にフォロワーの配列に格納するのかリストメンバの配列に格納するのかの分岐に使う
+    enum User {
+        case follower
+        case listMember
+    }
+    
     static var tweetList = [TweetEntity]()
     static var listList = [ListEntity]()
     static var followingUserList = [UserEntity]()
+    // 現在のリストメンバー
+    static var listMemberUserList = [UserEntity]()
     
     /// swifterインスタンスを返す
     ///
@@ -82,9 +90,9 @@ class TwitterAPIManager {
         }
         
         swifter.getListMembers(for: ListTag.id(id), cursor: curser, includeEntities: true, skipStatus: true, success: {
-           json in
+           (json, nowCousor, nextCousor) in
             // TODO: パース処理
-            print(json)
+            TwitterAPIManager.userParser(json: json, handle: .listMember)
             completion()
         }, failure: { error in
             print(error)
@@ -109,7 +117,7 @@ class TwitterAPIManager {
                 // 次の取得開始位置を更新
                 
                 TwitterAPIManager.getFollowing(id: id, cursor: next, completion: completion)
-                TwitterAPIManager.userParser(json: json)
+                TwitterAPIManager.userParser(json: json, handle: .follower)
                 
                 if next == "0" {
                     // 取得するフォローユーザがいない時クロージャを実行
@@ -370,7 +378,8 @@ class TwitterAPIManager {
 
     }
     
-    static func userParser(json: JSON) {
+    // フォローユーザ取得時のユーザパースに使う
+    static func userParser(json: JSON, handle: User) {
         
         if let users = json.array {
             for user in users {
@@ -380,8 +389,17 @@ class TwitterAPIManager {
                 entity.text = user["description"].string
                 entity.icon = user["profile_image_url_https"].string
                 entity.header = user["profile_background_image_url_https"].string
-                
-                TwitterAPIManager.followingUserList.append(entity)
+
+                switch handle {
+                case .follower:
+                    if TwitterAPIManager.listMemberUserList.filter({$0.id == entity.id}).count > 0 {
+                        // リストメンバに存在する場合
+                        entity.isSelected = true
+                    }
+                    TwitterAPIManager.followingUserList.append(entity)
+                case .listMember:
+                    TwitterAPIManager.listMemberUserList.append(entity)
+                }
             }
         }
         

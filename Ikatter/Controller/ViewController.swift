@@ -19,7 +19,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // 初期アカウント設定
         setupAccount()
         
@@ -102,10 +101,6 @@ class ViewController: UIViewController {
                     self.tweetTableView.reloadData()
             })
             
-//            if let name = UserDefaults.standard.object(forKey: "listName") as? String {
-//                navigationItem.title = name
-//            }
-            
             if let name = entity.listName {
                 navigationItem.title = name
             }
@@ -128,12 +123,20 @@ class ViewController: UIViewController {
     
     // メンバ追加ボタン押下時の処理
     func addMember() {
+        
+        if let entity = RealmManager.shared.getEntity(id: AccountStoreManager.shared.getIdentifier()) {
+            guard let id = entity.listID else {
+                return
+            }
+            TwitterAPIManager.getListMembers(id: id, curser: "-1", completion: {})
+        }
+        
         if let id = AccountStoreManager.shared.account?.identifier as String? {
             TwitterAPIManager.getFollowing(id: id as String, cursor: "-1", completion: {
                 let navigationController = AddListMemberNavigationController()
                 let layout = UICollectionViewFlowLayout()
                 layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-                layout.itemSize = CGSize.init(width: 150, height: 150)
+                layout.itemSize = CGSize(width: 150, height: 150)
                 let viewController = AddListMemberCollectionViewController(collectionViewLayout: layout)
                 viewController.delegate = self
                 navigationController.addChildViewController(viewController)
