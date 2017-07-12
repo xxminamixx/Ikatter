@@ -34,6 +34,10 @@ class AddListMemberCollectionViewController: UICollectionViewController {
         // NavigationBarの右に完了ボタンを追加
         let rightCompletionButon = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(completion))
         navigationItem.setRightBarButtonItems([rightCompletionButon], animated: true)
+        
+        // NavigationBarの左に閉じるボタンを追加
+        let leftCloseButon = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(close))
+        navigationItem.setLeftBarButtonItems([leftCloseButon], animated: true)
 
     }
 
@@ -58,6 +62,12 @@ class AddListMemberCollectionViewController: UICollectionViewController {
             dismiss(animated: true, completion: nil)
         })
         
+    }
+    
+    /// NacigationBarの左ボタンを押下した時の処理
+    func close() {
+        // 自身を閉じる
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: UICollectionViewDataSource

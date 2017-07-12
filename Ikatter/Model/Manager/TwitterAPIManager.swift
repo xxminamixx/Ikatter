@@ -92,8 +92,13 @@ class TwitterAPIManager {
         swifter.getListMembers(for: ListTag.id(id), cursor: curser, includeEntities: true, skipStatus: true, success: {
            (json, nowCousor, nextCousor) in
             // TODO: パース処理
-            TwitterAPIManager.userParser(json: json, handle: .listMember)
-            completion()
+            if let next = nextCousor {
+                TwitterAPIManager.userParser(json: json, handle: .listMember, completion: {
+                    if next == "0" {
+                        completion()
+                    }
+                })
+            }
         }, failure: { error in
             print(error)
         })
@@ -117,12 +122,12 @@ class TwitterAPIManager {
                 // 次の取得開始位置を更新
                 
                 TwitterAPIManager.getFollowing(id: id, cursor: next, completion: completion)
-                TwitterAPIManager.userParser(json: json, handle: .follower)
-                
-                if next == "0" {
-                    // 取得するフォローユーザがいない時クロージャを実行
-                    completion()
-                }
+                TwitterAPIManager.userParser(json: json, handle: .follower, completion: {
+                    if next == "0" {
+                        // 取得するフォローユーザがいない時クロージャを実行
+                        completion()
+                    }
+                })
             }
             
         }, failure: { error in
@@ -379,7 +384,7 @@ class TwitterAPIManager {
     }
     
     // フォローユーザ取得時のユーザパースに使う
-    static func userParser(json: JSON, handle: User) {
+    static func userParser(json: JSON, handle: User, completion: () -> Void) {
         
         if let users = json.array {
             for user in users {
@@ -399,6 +404,11 @@ class TwitterAPIManager {
                     TwitterAPIManager.followingUserList.append(entity)
                 case .listMember:
                     TwitterAPIManager.listMemberUserList.append(entity)
+                }
+                
+                if user == users.last {
+                    // パースが最後のユーザのとき
+                    completion()
                 }
             }
         }

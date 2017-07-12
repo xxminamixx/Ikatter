@@ -128,22 +128,36 @@ class ViewController: UIViewController {
             guard let id = entity.listID else {
                 return
             }
-            TwitterAPIManager.getListMembers(id: id, curser: "-1", completion: {})
-        }
-        
-        if let id = AccountStoreManager.shared.account?.identifier as String? {
-            TwitterAPIManager.getFollowing(id: id as String, cursor: "-1", completion: {
-                let navigationController = AddListMemberNavigationController()
-                let layout = UICollectionViewFlowLayout()
-                layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-                layout.itemSize = CGSize(width: 150, height: 150)
-                let viewController = AddListMemberCollectionViewController(collectionViewLayout: layout)
-                viewController.delegate = self
-                navigationController.addChildViewController(viewController)
-                
-                self.present(navigationController, animated: true, completion: nil)
+            TwitterAPIManager.getListMembers(id: id, curser: "-1", completion: {
+                if let id = AccountStoreManager.shared.account?.identifier as String? {
+                    TwitterAPIManager.getFollowing(id: id as String, cursor: "-1", completion: {
+                        let navigationController = AddListMemberNavigationController()
+                        let layout = UICollectionViewFlowLayout()
+                        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                        layout.itemSize = CGSize(width: 150, height: 150)
+                        let viewController = AddListMemberCollectionViewController(collectionViewLayout: layout)
+                        viewController.delegate = self
+                        navigationController.addChildViewController(viewController)
+                        
+                        self.present(navigationController, animated: true, completion: nil)
+                    })
+                }
             })
         }
+        
+//        if let id = AccountStoreManager.shared.account?.identifier as String? {
+//            TwitterAPIManager.getFollowing(id: id as String, cursor: "-1", completion: {
+//                let navigationController = AddListMemberNavigationController()
+//                let layout = UICollectionViewFlowLayout()
+//                layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+//                layout.itemSize = CGSize(width: 150, height: 150)
+//                let viewController = AddListMemberCollectionViewController(collectionViewLayout: layout)
+//                viewController.delegate = self
+//                navigationController.addChildViewController(viewController)
+//                
+//                self.present(navigationController, animated: true, completion: nil)
+//            })
+//        }
     }
     
     func setupAccount() {
