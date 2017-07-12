@@ -144,6 +144,26 @@ class TwitterAPIManager {
             return
         }
         
+        // 自分のツイートを取得しTweetエンティティに追加
+//        swifter.getTweet(forID: AccountStoreManager.shared.getIdentifier(), count: 20, trimUser: true, includeMyRetweet: true, includeEntities: true, success: { json in
+//             TwitterAPIManager.tweetParser(json: json, completion: completion)
+//        }, failure: { error in
+//            print(error)
+//        })
+        
+        swifter.getTimeline(for: AccountStoreManager.shared.getIdentifier(), count: 20, sinceID: nil, maxID: nil, trimUser: false, contributorDetails: true, includeEntities: true, success: { json in
+            TwitterAPIManager.tweetParser(json: json, completion: completion)
+        }, failure: { error in
+            print(error)
+        })
+        
+        // TODO: 自分へのmentionも含めたい
+        swifter.getMentionsTimlineTweets(count: 20, sinceID: nil, maxID: nil, trimUser: false, contributorDetails: true, includeEntities: true, success: { json in
+            TwitterAPIManager.tweetParser(json: json, completion: completion)
+        }, failure: { error in
+            print(error)
+        })
+        
         swifter.listTweets(for: ListTag.id(id), sinceID: sinceId(), maxID: nil, count: 30, includeEntities: true, includeRTs: false, success: { json in
             // リストタイムライン取得時にtweetList初期化
             TwitterAPIManager.tweetParser(json: json, completion: completion)
