@@ -135,6 +135,32 @@ class TwitterAPIManager {
         })
     }
     
+    // 自分のツイートを取得
+    private static func getTimeLine(completion: @escaping () -> Void) {
+        guard let swifter = TwitterAPIManager.swifter() else {
+            return
+        }
+        // 自分のツイートを取得しTweetエンティティに追加
+        swifter.getTimeline(for: AccountStoreManager.shared.getIdentifier(), count: 30, sinceID: sinceId(), maxID: maxId(), trimUser: false, contributorDetails: true, includeEntities: true, success: { json in
+            TwitterAPIManager.tweetParser(json: json, completion: completion)
+        }, failure: { error in
+            print(error)
+        })
+    }
+    
+    // 自分へのリプライを取得
+    private static func getMentionTimeLine(completion: @escaping () -> Void) {
+        guard let swifter = TwitterAPIManager.swifter() else {
+            return
+        }
+        // 自分へのリプライを取得
+        swifter.getMentionsTimlineTweets(count: 30, sinceID: sinceId(), maxID: maxId(), trimUser: false, contributorDetails: true, includeEntities: true, success: { json in
+            TwitterAPIManager.tweetParser(json: json, completion: completion)
+        }, failure: { error in
+            print(error)
+        })
+    }
+    
     /// 指定リストの最新ツイートを取得する
     ///
     /// - Parameter id: リストID
@@ -144,32 +170,18 @@ class TwitterAPIManager {
             return
         }
         
-        // 自分のツイートを取得しTweetエンティティに追加
-//        swifter.getTweet(forID: AccountStoreManager.shared.getIdentifier(), count: 20, trimUser: true, includeMyRetweet: true, includeEntities: true, success: { json in
-//             TwitterAPIManager.tweetParser(json: json, completion: completion)
-//        }, failure: { error in
-//            print(error)
-//        })
-        
-        swifter.getTimeline(for: AccountStoreManager.shared.getIdentifier(), count: 20, sinceID: nil, maxID: nil, trimUser: false, contributorDetails: true, includeEntities: true, success: { json in
-            TwitterAPIManager.tweetParser(json: json, completion: completion)
-        }, failure: { error in
-            print(error)
-        })
-        
-        // TODO: 自分へのmentionも含めたい
-        swifter.getMentionsTimlineTweets(count: 20, sinceID: nil, maxID: nil, trimUser: false, contributorDetails: true, includeEntities: true, success: { json in
-            TwitterAPIManager.tweetParser(json: json, completion: completion)
-        }, failure: { error in
-            print(error)
-        })
-        
         swifter.listTweets(for: ListTag.id(id), sinceID: sinceId(), maxID: nil, count: 30, includeEntities: true, includeRTs: false, success: { json in
             // リストタイムライン取得時にtweetList初期化
             TwitterAPIManager.tweetParser(json: json, completion: completion)
         }, failure: { error in
             print(error)
         })
+        
+        TwitterAPIManager.getTimeLine {
+            TwitterAPIManager.getMentionTimeLine {
+                completion()
+            }
+        }
         
     }
     
@@ -190,6 +202,12 @@ class TwitterAPIManager {
         }, failure: { error in
             print(error)
         })
+        
+        TwitterAPIManager.getTimeLine {
+            TwitterAPIManager.getMentionTimeLine {
+                completion()
+            }
+        }
         
     }
     
