@@ -36,20 +36,20 @@ class TwitterAPIManager {
         completion()
     }
     
-    static func getTimeLine(completion: @escaping () -> Void) {
-        guard let account = AccountStoreManager.shared.account else {
-            return
-        }
-        
-        let swifter = Swifter(account: account)
-        
-        // タイムライン取得
-        swifter.getHomeTimeline(count: 30, sinceID: sinceId(), maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: true, success: { json in
-            TwitterAPIManager.tweetParser(json: json, completion: completion)
-        }, failure: { error in
-            print(error)
-        })
-    }
+//    static func getTimeLine(completion: @escaping () -> Void) {
+//        guard let account = AccountStoreManager.shared.account else {
+//            return
+//        }
+//        
+//        let swifter = Swifter(account: account)
+//        
+//        // タイムライン取得
+//        swifter.getHomeTimeline(count: 30, sinceID: sinceId(), maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: true, success: { json in
+//            TwitterAPIManager.tweetParser(json: json, completion: completion)
+//        }, failure: { error in
+//            print(error)
+//        })
+//    }
     
     
     /// リスト取得
@@ -122,18 +122,37 @@ class TwitterAPIManager {
         })
     }
     
-    /// 指定リストをTweetListに格納する
+    /// 指定リストの最新ツイートを取得する
     ///
     /// - Parameter id: リストID
-    static func showList(id: String, completion: @escaping () -> Void) {
+    /// - completion: リスト取得後処理
+    static func showListNewTweet(id: String, completion: @escaping () -> Void) {
         guard let swifter = TwitterAPIManager.swifter() else {
             return
         }
         
         swifter.listTweets(for: ListTag.id(id), sinceID: sinceId(), maxID: nil, count: 30, includeEntities: true, includeRTs: false, success: { json in
             // リストタイムライン取得時にtweetList初期化
-            // 他のAPIで取得したツイートと混同させないため
-            TwitterAPIManager.tweetList = [TweetEntity]()
+            TwitterAPIManager.tweetParser(json: json, completion: completion)
+        }, failure: { error in
+            print(error)
+        })
+        
+    }
+    
+    
+    /// 指定リストの過去ツイートを取得する
+    ///
+    /// - Parameters:
+    ///   - id: リストID
+    ///   - completion: リスト取得後処理
+    static func showListOldTweet(id: String, completion: @escaping () -> Void) {
+        guard let swifter = TwitterAPIManager.swifter() else {
+            return
+        }
+        
+        swifter.listTweets(for: ListTag.id(id), sinceID: nil, maxID: maxId(), count: 30, includeEntities: true, includeRTs: false, success: { json in
+            // リストタイムライン取得時にtweetList初期化
             TwitterAPIManager.tweetParser(json: json, completion: completion)
         }, failure: { error in
             print(error)
@@ -196,18 +215,18 @@ class TwitterAPIManager {
     }
     
     /// お気に入り取得
-    static func getFavorite(completion: @escaping () -> Void) {
-        // アカウント情報がなかったら何もしない
-        let manager = AccountStoreManager.shared
-        guard let account = manager.account else {
-            return
-        }
-        
-        let swifter = Swifter(account: account)
-        swifter.getRecentlyFavouritedTweets(count: 10, sinceID: nil, maxID: nil, success: { json in
-            TwitterAPIManager.tweetParser(json: json, completion: completion)
-        })
-    }
+//    static func getFavorite(completion: @escaping () -> Void) {
+//        // アカウント情報がなかったら何もしない
+//        let manager = AccountStoreManager.shared
+//        guard let account = manager.account else {
+//            return
+//        }
+//        
+//        let swifter = Swifter(account: account)
+//        swifter.getRecentlyFavouritedTweets(count: 10, sinceID: nil, maxID: nil, success: { json in
+//            TwitterAPIManager.tweetParser(json: json, completion: completion)
+//        })
+//    }
     
     /// 指定ツイートをお気に入りする
     ///
@@ -270,7 +289,21 @@ class TwitterAPIManager {
     }
     
     /// 最新のidを返す
+    /// ツイートEntityがソートされて最新ツイート順に並んでる前提
     static func sinceId() -> String? {
+        
+        if TwitterAPIManager.tweetList.count > 0 {
+            // tweetが格納されていた場合
+            return TwitterAPIManager.tweetList.first?.id
+        } else {
+            return nil
+        }
+        
+    }
+    
+    /// 最古のidを返す
+    /// ツイートEntityがソートされて最新ツイート順に並んでる前提
+    static func maxId() -> String? {
         
         if TwitterAPIManager.tweetList.count > 0 {
             // tweetが格納されていた場合
@@ -305,20 +338,6 @@ class TwitterAPIManager {
                 entity.upperRightImage = imageList[1]["media_url_https"].string
                 entity.buttomLeftImage = imageList[2]["media_url_https"].string
                 entity.buttomRightImage = imageList[3]["media_url_https"].string
-                
-//                if let image = tweet["entities"]["media"] {
-//                    // 画像が1枚のとき
-//                    entity.upperLeftImage = image
-//                } else {
-//                    // 画像が複数枚のとき
-//                    
-//                    // Tweetに含まれる画像urlをパース
-//                    let imageList = tweet["extended_entities"]["media"]
-//                    entity.upperLeftImage = imageList[0]["media_url_https"].string
-//                    entity.upperRightImage = imageList[1]["media_url_https"].string
-//                    entity.buttomLeftImage = imageList[2]["media_url_https"].string
-//                    entity.buttomRightImage = imageList[3]["media_url_https"].string
-//                }
                 
                 // TODO: ここの処理重そうなので後で処理回数少なくする方法を考える
                 // 同じツイートidがあったら追加しない

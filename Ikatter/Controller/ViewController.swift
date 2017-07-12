@@ -71,7 +71,7 @@ class ViewController: UIViewController {
         
         if let id = UserDefaults.standard.object(forKey: "listID") as? String {
             tweetTableView.dg_addPullToRefreshWithActionHandler({
-                TwitterAPIManager.showList(id: id, completion: {
+                TwitterAPIManager.showListNewTweet(id: id, completion: {
                         self.tweetTableView.reloadData()
                         self.tweetTableView.dg_stopLoading()
                 })
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
                 return
             }
             
-            TwitterAPIManager.showList(id: id, completion: {
+            TwitterAPIManager.showListNewTweet(id: id, completion: {
                     self.tweetTableView.reloadData()
             })
             
@@ -221,9 +221,30 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-
 extension ViewController: UITableViewDelegate {}
 
+extension ViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if tweetTableView.contentOffset.y + tweetTableView.frame.size.height > tweetTableView.contentSize.height && tweetTableView.isDragging {
+            // テーブルビューの最下に来たとき
+            
+            if let entity = RealmManager.shared.getEntity(id: AccountStoreManager.shared.getIdentifier()) {
+                guard let id = entity.listID else {
+                    return
+                }
+                
+                // 過去ツイートの取得とtableViewの更新
+                TwitterAPIManager.showListOldTweet(id: id, completion: {
+                    self.tweetTableView.reloadData()
+                })
+                
+            }
+        }
+    }
+    
+}
 
 extension ViewController: UISearchBarDelegate {
     // TODO: サーチバーに入力した文字でTweetを検索しテーブルビューに表示
@@ -291,9 +312,6 @@ extension ViewController: ListTableViewControllerDelegate {
     
     func listTapped(id: String, name: String, completion: @escaping () -> Void) {
         
-        // リストIDをNSURLDefaultsで永続化
-//        UserDefaults.standard.set(id, forKey: "listID")
-        
         // 今のアカウントにリストIDを紐づける
         let accountListPair = RealmManager.shared.getEntity(id: AccountStoreManager.shared.getIdentifier())
         RealmManager.shared.update({
@@ -301,7 +319,7 @@ extension ViewController: ListTableViewControllerDelegate {
             accountListPair?.listName = name
         })
         
-        TwitterAPIManager.showList(id: id, completion: {
+        TwitterAPIManager.showListNewTweet(id: id, completion: {
             completion()
             self.tweetTableView.reloadData()
                 // タイムラインタブ表示
